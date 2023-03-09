@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery</title>
+<style type="text/css">
+#accodingMenu {
+	position: absolute;
+	left: 50px;
+	top: 100px;
+	width: 300px;
+	padding: 20px;
+	background-color: #eeeeee;
+}
+
+.menuItem {
+	margin: 20px;
+	position: relative;
+	height: 20px;
+	overflow: hidden;
+}
+
+.menuItemContent {
+	position: absolute;
+}
+
+.menuItemContent img {
+	display: block;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+	<h1>어코디언</h1>
+	<hr>
+	<div id="accodingMenu">
+		<div class="menuItem">
+			<div class="menuItemContent">
+				<img src="menu_1.png">
+				<img src="menu_1_over.png">
+			</div>
+		</div>
+		<div class="menuItem">
+			<div class="menuItemContent">
+				<img src="menu_2.png">
+				<img src="menu_2_over.png">
+			</div>
+		</div>
+		<div class="menuItem">
+			<div class="menuItemContent">
+				<img src="menu_3.png">
+				<img src="menu_3_over.png">
+			</div>
+		</div>
+		<div class="menuItem">
+			<div class="menuItemContent">
+				<img src="menu_4.png">
+				<img src="menu_4_over.png">
+			</div>
+		</div>
+		<div class="menuItem">
+			<div class="menuItemContent">
+				<img src="menu_5.png">
+				<img src="menu_5_over.png">
+			</div>
+		</div>
+		<div class="menuItem">
+			<div class="menuItemContent">
+				<img src="menu_6.png">
+				<img src="menu_6_over.png">
+			</div>
+		</div>
+		<div class="menuItem">
+			<div class="menuItemContent">
+				<img src="menu_7.png">
+				<img src="menu_7_over.png">
+			</div>
+		</div>
+		<div class="menuItem">
+			<div class="menuItemContent">
+				<img src="menu_8.png">
+				<img src="menu_8_over.png">
+			</div>
+		</div>
+		<div class="menuItem">
+			<div class="menuItemContent">
+				<img src="menu_9.png">
+				<img src="menu_9_over.png">
+			</div>
+		</div>
+		<div class="menuItem">
+			<div class="menuItemContent">
+				<img src="menu_10.png">
+				<img src="menu_10_over.png">
+			</div>
+		</div>		
+	</div>
+	
+	<script type="text/javascript">
+	//마우스 커서가 위치한 태그를 저장하기 위한 전역변수
+	var $overMenuItem=null;
+	
+	//태그에 마우스 커서가 진입한 경우 콜백함수 호출
+	$(".menuItem").mouseover(function() {
+		
+		//이벤트가 발생된 태그를 전역변수에 저장
+		$overMenuItem=$(this);
+		
+		//이벤트가 발생된 태그의 높이를 변경
+		//ㄴ 그림메뉴가 출력되도록 태그의 높이 변경
+		$overMenuItem.stop().animate({"height":113}, 100);
+		
+		//이벤트가 발생된 태그의 자식태그가 출력될 y 좌표값을 변경
+		//ㄴ 문자 메뉴가 위로 이동(문자메뉴 숨김)
+		$overMenuItem.find("menuItemContent").stop().animate({"top":-20}, 100);
+	});
+	
+	//태그에서 마우스 커서가 벗어난 경우 콜백함수 호출(그림메뉴 hide, 문자메뉴 show)
+	$(".menuItem").mouseout(function() {
+		$overMenuItem.stop().animate({"height":20}, 100);
+		$overMenuItem.find("menuItemContent").stop().animate({"top":0}, 100);
+	});
+	</script>
+</body>
+</html>

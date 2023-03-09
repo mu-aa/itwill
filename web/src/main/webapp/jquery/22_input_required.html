@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<style type="text/css">
+fieldset {
+	width: 800px;
+	margin: 10px auto;
+}
+
+legend {
+	font-size: 1.2em;
+}
+
+#joinForm ul li {
+	list-style-type: none;
+	margin: 15px 0; 
+}
+
+#joinForm label {
+	width: 100px;
+	text-align: right;
+	float: left;
+	margin-right: 10px;
+}
+
+#btnFs {
+	text-align: center;
+}
+
+.error {
+	color: red;
+	margin-left: 10px;
+}
+</style>
+</head>
+<body>
+	<h1>Form Event</h1>
+	<hr>
+	<form action="22_input_required.html" method="post" id="joinForm">
+		<fieldset>
+			<legend>회원가입정보</legend>
+			<ul>
+				<li>
+					<label for="id">아이디</label>
+					<!-- 입력태그에 required 속성을 설정하면 입력값이 없는 경우 form 태그 미실행 - 비권장 -->
+					<!-- <input type="text" name="id" id="id" required="required"> -->
+					<input type="text" name="id" id="id" class="required">
+					<span id="idMsg" class="error"></span>
+				</li>
+				<li>
+					<label for="passwd">비밀번호</label>
+					<input type="password" name="passwd" id="passwd" class="required">
+					<span id="passwdMsg" class="error"></span>
+				</li>
+				<li>
+					<label for="name">이름</label>
+					<input type="text" name="name" id="name" class="required">
+					<span id="nameMsg" class="error"></span>
+				</li>
+				<li>
+					<label for="email">이메일</label>
+					<input type="text" name="email" id="email" class="required">
+					<span id="emailMsg" class="error"></span>
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset id="btnFs">
+			<button type="submit" id="submitBtn">회원가입</button>
+			<button type="reset" id="resetBtn">다시입력</button>
+		</fieldset>
+	</form>
+	
+	<script type="text/javascript">
+	$("#id").focus();
+
+	$("#joinForm").submit(function() {
+		$(".error").text("");
+		
+		var result=true;
+		
+		//에러 메세지가 요소값으로 저장된 Object 객체 생성 
+		var message={"id":"아이디를 입력해주세요.", "passwd":"비밀번호를 입력해주세요."
+				, "name":"이름을 입력해주세요.", "email":"이메일을 입력해주세요."};
+		
+		//태그의 class 속성값이 [required]로 설정된 태그(입력태그)를 검색하여 명시적 반복
+		$(this).find(".required").each(function() {
+			if($(this).val()=="") {
+				//입력태그의 id 속성값을 반환받아 저장
+				var value=$(this).attr("id");
+				
+				//에러 메세지가 출력될 태그를 검색하여 에러 메세지로 태그내용 변경
+				$("#"+value+"Msg").text(message[value]);
+				
+				result=false;
+			}
+		});
+		return result;
+	});
+	</script>
+</body>
+</html>

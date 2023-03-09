@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+</head>
+<body>
+	<h1>DOM(Document Object Model) - Element 객체 삭제</h1>
+	<hr>
+	<h2>Element-1</h2>
+	<h2 id="remove">Element-2</h2>
+	<h2>Element-3</h2>
+	
+	<script type="text/javascript">
+	
+	/* id가 존재할 경우 삭제 방법
+	var h2E=document.getElementById("remove");
+	
+	//Node.removeChild(oldNode) : Node(Element) 객체의 자식 Node(Element) 객체를 DOM Tree에서 삭제하는 메소드
+	//document.body.removeChild(h2E);
+	
+	//Node.parentNode : Node(Element) 객체의 부모 Node(Element) 객체를 저장한 프로퍼티
+	h2E.parentNode.removeChild(h2E);
+	*/
+	
+	// id가 존재하지 않을 경우 삭제 방법
+	var h2List=document.getElementsByTagName("h2");
+	var removeE=h2List.item(1);
+	removeE.parentNode.removeChild(removeE);
+	</script>
+</body>
+</html>

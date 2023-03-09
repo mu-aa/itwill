@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+</head>
+<body>
+	<h1>예외 처리(Exception Handle)</h1>
+	<hr>
+	<p>예외(Exception) : 프로그램 실행 시 발생되는 문제(오류)</p>
+	
+	<script type="text/javascript">
+	try { //예외가 발생할 수도 있는 명령을 작성
+		var array=new Array(100000000000000000000000000000000); //예외 발생 - 하단의 명령 미실행
+		alert("Array 객체의 요소 갯수 = "+array.length);
+	} catch(e) { //try 영역의 명령에서 발생한 예외를 제공받아 예외처리 명령을 작성
+		alert("프로그램에 문제가 발생하여 종료됩니다.");
+		alert("예외 메세지 = "+e);
+	} finally { //예외 발생과 상관없이 무조건 실행되는 명령을 작성
+		alert("예외와 관계없이 무조건 실행되는 명령입니다.");
+	}
+	</script>
+</body>
+</html>

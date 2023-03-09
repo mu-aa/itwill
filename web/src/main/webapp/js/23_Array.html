@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+</head>
+<body>
+	<h1>Array 클래스 함수</h1>
+	<hr>
+	<p>값(객체)을 여러 개 저장하기 위한 객체(배열)를 생성하기 위한 클래스 함수
+		- 객체에 대한 프로퍼티와 메소드 제공</p>
+	<script type="text/javascript">
+	
+	//요소가 하나도 없는 Array 객체 생성 - Empty Array
+	//var array=new Array();
+	
+	//alert(array.length); //Array 객체에 저장된 요소의 갯수를 저장한 프로퍼티
+	//alert(array.toString()); //Array 객체에 저장된 모든 요소값을 문자값으로 변환하는 메소드(생략가능)
+	
+	//Array(size) : 매개변수에 전달된 정수값의 갯수만큼 요소를 가진 Array 객체 생성
+	//ㄴ Array 객체의 요소값은 자동으로 null 저장
+	
+	/*
+	var array=new Array(5);
+	alert(array.length);
+	alert(array);
+	*/
+	
+	/*
+	//Array(value, value, ...) : 매개변수에 전달된 값이 요소값으로 저장된 Array 객체 생성
+	//ㄴ 매개변수에 전달된 값의 갯수만큼 Array 객체의 요소 생성
+	var array=new Array(10, 20, 30, 40, 50);
+	alert(array);
+	*/
+	
+	//JSON 기능을 사용하여 Array 객체 생성 - [ ] 연산자
+	var array=[10, 20, 30];
+	
+	//Array 객체에 저장된 요소는 첨자(0부터 1씩 증가되는 정수값)를 사용하여 구분
+	//ㄴ Array 객체에 요소를 표현할 경우 [ ] 연산자에 첨자를 사용하여 표현
+//	alert("array[0] = "+array[0]);
+//	alert("array[1] = "+array[1]);
+//	alert("array[2] = "+array[2]);
+
+	//Array 객체의 요소를 표현하는 첨자가 범위를 벗어난 경우 [undefined] 자료형으로 표현 
+//	alert("array[3] = "+array[3]); //undefined
+	
+	//★Array 객체의 요소를 for 구문으로 일괄처리
+//	for(i=0;i<array.length;i++) {
+//		alert("array["+i+"] = "+array[i]);
+//	}
+	
+	//in 연산자를 이용한 for 구문으로 Array 객체의 첨자를 제공받아 일괄처리
+//	for(index in array) {
+//		alert("array["+index+"] = "+array[index]);
+//	}
+	
+	//array.forEach(callback(element[, index][, array])) : Array 객체의 요소를 일괄처리 하기 위한 
+	//기능을 제공하는 메소드 - 콜백 함수가 Array 객체에 저장된 요소의 갯수만큼 반복 호출되며 
+	//매개변수에는 Array 객체의 요소값(element), 첨자(index), Array 객체(array)가 자동저장 
+//	array.forEach(function(element, index) {
+//		alert("array["+index+"] = "+element);
+//	});
+	
+	//Array.push(value) : Array 객체의 마지막 위치에 요소를 추가하여 전달값을 저장하는 메소드
+	array.push(40);
+	alert(array); //10, 20, 30, 40
+	
+	//Array.pop(value) : Array 객체의 마지막 위치의 요소를 제거하고 요소값을 반환하는 메소드
+	var num=array.pop();
+	alert(array); //10, 20, 30
+	alert(num); //40 (반환된 제거값)
+	
+	//Array.unshift(value) : Array 객체의 첫번째 위치에 요소를 추가하여 전달값을 저장하는 메소드
+	array.unshift(40);
+	alert(array); //40, 10, 20, 30
+
+	//Array.shift(value) : Array 객체의 첫번째 위치의 요소를 제거하고 요소값을 반환하는 메소드
+	var num=array.shift();
+	alert(array); //10, 20, 30
+	alert(num); //40 (반환된 제거값)
+	</script>
+</body>
+</html>

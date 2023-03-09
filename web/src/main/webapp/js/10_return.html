@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+</head>
+<body>
+	<h1>Return</h1>
+	<hr>
+	<p>return : 함수를 강제로 종료하기 위한 명령 - 함수의 내부값(처리결과)을 반환하는 기능 제공</p>
+	<script type="text/javascript">
+	/*
+	function display(name) {
+		if(name=="홍길동") {
+			alert("admin");
+			return;
+		}
+		alert(name+"님 안녕하세요.")
+	}
+	
+	display("홍길동");
+	display("임꺽정");
+	*/
+	/*
+	function sum(num1, num2) {
+		return num1+num2; //함수를 종료하며 값을 반환
+	}
+	
+	var tot=sum(10, 20); //함수를 호출하며 반환되는 값을 변수에 저장
+	alert("합계 = "+tot)
+	*/
+	
+	//ES6에서 추가된 화살표 함수를 사용하여 함수 선언 및 호출
+	//const sum=(num1, num2) => { return num1+num2; }
+	//화살표 함수의 명령으로 값을 반환하는 명령이 하나만 있는 경우 { } 기호 및 return 키워드 생략
+	//const sum=(num1, num2) => { return num1+num2; }
+	const sum=(num1, num2) => { num1+num2; }
+	alert("합계 = "+sum(10, 20)); //함수를 호출하여 반환되는 값을 변수에 저장하지 않고 출력
+	
+	function display() {
+		alert("선언함수의 명령 실행")
+	}
+	
+	//반환되는 값이 없는 함수 호출 시 반환값을 사용하면 [undefined] 자료형으로 처리
+	alert(display());
+	</script>
+</body>
+</html>

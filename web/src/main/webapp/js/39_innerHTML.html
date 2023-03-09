@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+</head>
+<body>
+	<h1>DOM(Document Object Model) - innerHTML</h1>
+	<hr>
+	<ul> <!-- ulList.item(0) -->
+		<li>Menu-1</li>
+		<li>Menu-2</li><!-- liList.item(1) --> 
+		<li>Menu-3</li>
+	</ul>
+	<ul> <!-- ulList.item(1) -->
+		<li>Menu-4</li>
+		<li>Menu-5</li>
+		<li>Menu-6</li>
+	</ul>
+	<hr>
+	<div id="text"></div>
+	<script type="text/javascript">
+	
+	var ulList=document.getElementsByTagName("ul");
+	var liList=ulList.item(0).getElementsByTagName("li");
+	var liE=liList.item(1); //<li>menu-2</li>
+	
+	//Node(Element) 객체의 첫번째 자식 객체(Text 객체)의 노드내용 변경 - 태그내용 변경
+	//liE.firstChild.nodeValue="신메뉴"; //<li>신메뉴</li>
+	
+	var liT=document.createTextNode("신메뉴"); //Text 객체 생성하여 변수에 저장
+	//Node.replaceChild(newChild, oldChild) : Node(Element) 객체의 자식 Node(Element) 객체를 
+	liE.replaceChild(liT, liE.firstChild);
+	
+	/* 일일히 추가하기 번거로움
+	var pE=document.createElement("p"); //<p></p>
+	var pT=document.createTextNode("p 태그의 내용");
+	pE.appendChild(pT); //<p>p 태그의 내용</p>
+	var textE=document.getElementById("text");
+	textE.appendChild(pE); //추가
+	*/
+	
+	//innerHTML로 한번에 추가
+	var textE=document.getElementById("text");
+	//Node.innerHTML :  Node(Element) 객체의 하위태그를 저장한 프로퍼티
+	//ㄴ Node.innerHTML 프로퍼티를 사용하여 Node(Element) 객체의 하위태그 변경 가능
+	textE.innerHTML="<p>p 태그의 내용</p>";
+	</script>
+</body>
+</html>

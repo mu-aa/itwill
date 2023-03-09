@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CSS</title>
+<style type="text/css">
+div {
+	margin: 20px;
+	padding: 10px;
+	border: 2px solid red;
+	text-align: center;
+}
+
+/* display : 박스모델 배치 관련 스타일 속성 */
+/* 속성값 : none, block, inline 등 */
+/* ㄴ none 속성값 : 박스모델을 브라우저에 배치하지 않도록 설정 - 박스모델 미배치 */
+/* ㄴ block 속성값 : */
+/* ㄴ inline 속성값 : */
+.on {
+	display: inline;
+}
+.off {
+	display: none;
+}
+
+/* visibility : 박스모델 출력 관련 스타일 속성 */
+/* 속성값 : visible(박스모델 출력 - default), hidden(미출력) */
+.show{
+	visibility: visible;
+}
+.hide{
+	visibility: hidden;
+}
+</style>
+</head>
+<body>
+	<h1>박스모델 배치 관련 스타일 속성</h1>
+	<hr>
+	<div>
+		<img alt="펜션 이미지1" src="images/1.png" class="on">
+		<img alt="펜션 이미지2" src="images/2.png" class="off">
+		<img alt="펜션 이미지3" src="images/3.png" class="on">
+	</div>
+	<div>
+		<img alt="펜션 이미지1" src="images/1.png" class="show">
+		<img alt="펜션 이미지2" src="images/2.png" class="hide">
+		<img alt="펜션 이미지3" src="images/3.png" class="show">
+	</div>
+</body>
+</html>

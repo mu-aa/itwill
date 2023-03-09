@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+</head>
+<body>
+	<h1>DOM(Document Object Model) - Element 객체</h1>
+	<hr>
+	<p>Node 객체 : 태그(TagNode)와 태그내용(TextNode)을 객체로 표현</p>
+	<p>Element 객체 : 태그(TagNode)를 객체로 표현</p>
+	<hr>
+	<h2 id="headline">h2 태그에 의해 출력되는 내용</h2>
+	<ul>
+		<li>li 태그에 의해 출력되는 내용-1</li>
+		<li>li 태그에 의해 출력되는 내용-2</li>
+		<li>li 태그에 의해 출력되는 내용-3</li>
+	</ul>
+	<p class="text">p 태그에 의해 출력되는 내용</p>
+	<script type="text/javascript">
+	
+	//document.getElementByid(id) : 태그의 id 속성값으로 태그를 검색하여 태그에 대한 Element 객체를 반환하는 메소드
+	//ㄴ document 객체의 자식태그 중 하나의 태그를 검색하여 Element 객체로 반환
+	//ㄴ document 객체 대신 부모 Element 객체를 사용하여 자식 Element 객체를 검색하여 반환
+	var h2E=document.getElementById("headline");
+	//alert(h2E); //[object HTMLHeadingElement]
+	
+	//Node.nodename : Node(Element) 객체의 노드명(태그명)을 저장한 프로퍼티
+	//alert(h2E.nodename); //H2
+
+	//Node.nodeValue : Node(Element) 객체의 노드값(태그내용)을 저장한 프로퍼티
+	//alert(h2E.nodeValue); //null
+	
+	//Node.firstChild : Node(Element) 객체의 첫번째 자식 Node 객체를 저장한 프로퍼티
+	//alert(h2E.firstChild); //[object Text] - TextNode
+	//alert(h2E.firstChild.nodename); //undefined - #text
+	//alert(h2E.firstChild.nodeValue); //h2 태그에 의해 출력되는 내용 - 태그내용
+	
+	//Node 객체의 nodeValue 프로퍼티의 저장값 변경 - 태그내용 변경
+	//h2E.firstChild.nodeValue="h2 태그의 내용 변경";
+	
+	/*
+	//document.getElementsByTagName(tagName) : 태그명을 이용하여 태그를 검색하여 NodeList 객체로 반환하는 메소드
+	//ㄴ 다수의 태그를 검색하여 Element 객체의 모임(List 객체)으로 반환
+	//NodeList 객체 : Node(Element) 객체가 다수 저장된 콜렉션 객체
+	var liList=document.getElementsByTagName("li");
+	//alert(liList); //[object HTMLCollection]
+	
+	//NodeList.length : NodeList 객체에 저장된 Node 객체의 갯수를 저장한 프로퍼티
+	//alert(liList.length); //3
+	
+	for(i=0;i<liList.length;i++) {
+		//NodeList.item(index) : NodeList 객체에서 첨자(Index) 위치의 Node(Element) 객체를 반환하는 메소드
+		var liE=liList.item(i);
+		//alert(liE); //[object HTMLLIElement]
+		alert(liE.firstChild.nodeValue);
+	}
+	*/
+	
+	/*
+	//document.getElementsByClassName(class) : 태그의 class 속성값을 이용하여 태그를 검색하여 NodeList 객체로 반환하는 메소드
+	// => 다수의 태그를 검색하여 Element 객체의 모임(List 객체)으로 반환 
+	// => document 객체 대신 부모 Element 객체를 사용하여 자식 Element 객체들을 검색하여 반환
+	var pList=document.getElementsByClassName("text");
+	//alert(pList);//[object HTMLCollection]
+	//alert(pList.item(0).nodeName);//P
+	alert(pList.item(0).firstChild.nodeValue);//p 태그에 의해 출력되는 내용
+	*/
+	
+	//document.querySelector(selector) : CSS 선택자로 태그를 검색하여 Element 객체를 반환하는 메소드
+	//ㄴ document 객체의 자식태그 중 하나의 태그를 검색하여 Element 객체로 반환
+	//ㄴ document 객체 대신 부모 Element 객체를 사용하여 자식 Element 객체를 검색하여 반환
+	//var pE=document.querySelector(".text");
+	//alert(pE.firstChild.nodeValue); //p 태그에 의해 출력되는 내용
+	
+	//document.querySelectorAll(selector) : CSS 선택자로 태그들을 검색하여 NodeList 객체를 반환
+	//ㄴ 다수의 태그를 검색하여 Element 객체의 모임(List 객체)으로 변환
+	//ㄴ document 객체 대신 부모 Element 객체를 사용하여 자식 Element 객체를 검색하여 반환
+	var pList=document.querySelectorAll(".text");
+	alert(pList.item(0).firstChild.nodeValue);// p 태그에 의해 출력되는 내용
+	</script>
+</body>
+</html>

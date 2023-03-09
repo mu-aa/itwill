@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+	<h1>Key Event</h1>
+	<hr>
+	<p>keydown : 태그에서 키보드를 누른 경우 발생되는 이벤트</p>
+	<p>keypress : 태그에서 키보드를 누르고 있는 경우 발생되는 이벤트 - KeyCode 제공</p>
+	<p>keyup : 태그에서 키보드를 뗀 경우 발생되는 이벤트 - KeyCode 제공</p>
+	<hr>
+	<form method="post" name="loginForm" id="loginForm">
+	<table>
+		<tr>
+			<td>아이디</td>
+			<td><input type="text" name="id" id="id"></td>
+		</tr>
+		<tr>
+			<td>비밀번호</td>
+			<td><input type="password" name="passwd" id="passwd"></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<button type="button" id="loginBtn">로그인</button>
+			</td>
+		</tr>			
+	</table>
+	</form>
+	<hr>
+	<div>현재 작성된 글자 수 : <span id="count">0</span></div>
+	<textarea rows="7" cols="80" id="content"></textarea>
+	
+	<script type="text/javascript">
+	//form 태그와 입력태그(input, select, textarea)의 name 속성값을 Element 객체로 사용 가능
+	//ㄴ 입력태그의 Element 객체로 focus() 메소드를 호출하면 입력태그에 입력초점 제공
+	//loginForm.id.focus();
+	
+	//$(selector).focus() : 선택자로 검색된 태그(입력태그)에 입력초점을 제공하는 메소드
+	//$(loginForm.id).focus();
+	$("#id").focus();
+	
+	$("#loginBtn").click(function() {
+		/* js 문법
+		//입력태그의 Element 객체에 value 프로퍼티를 이용하여 입력값 사용 가능
+		if(loginForm.id.value=="") {
+			alret("아이디를 입력해주세요.");
+			loginForm.id.focus();
+			return;
+		}
+		*/
+		
+		//$(selector).val() : 선택자로 검색된 태그(입력태그)의 입력값을 반환하는 메소드
+		//ㄴ ★html, text 메소드와 차이점 : val() 메소드는 입력태그에서만 사용
+		if($("#id").val()=="") {
+			alert("아이디를 입력해주세요.");
+			$("#id").focus();
+			return;
+		}
+
+		if($("#passwd").val()=="") {
+			alert("비밀번호를 입력해주세요.");
+			$("#passwd").focus();
+			return;
+		}
+		
+		//form 태그의 Element 객체로 subimit 메소드를 호출하여 제출 이벤트 발생 - form 태그 실행
+		//loginForm.submit();
+		
+		//$(selector).submit() : 선택자로 검색된 태그(form 태그)에서 제출 이벤트를 발생하는 메소드
+		$("#loginForm").submit();
+	});
+	
+	$("#id").keypress(function() {
+		//event.KeyCode : 이벤트가 발생된 키보드의 코드값(ASCII CODE)을 제공하는 프로퍼티
+		//alert(event.keyCode);
+	
+		if(event.keyCode==13) { //엔터 입력 시
+			$("#passwd").focus(); //아이디에서 비밀번호로 focus 전환
+		}
+	});
+	
+	//비밀번호에서 엔터를 눌러 submit
+	$("#passwd").keypress(function() {
+		if(event.keyCode==13) {
+			if($("#id").val()=="") {
+				alert("아이디를 입력해주세요.");
+				$("#id").focus();
+				return;
+			}
+			if($("#passwd").val()=="") {
+				alert("비밀번호를 입력해주세요.");
+				$("#passwd").focus();
+				return;
+			}
+			$("#loginForm").submit();
+		}
+	});
+	
+	//글자 수 세기 기능
+	$("#content").keyup(function() {
+		//입력태그에 입력된 문자 갯수를 제공받아 변수에 저장
+		var count=$(this).val().length;
+		
+		$("#count").text(count);
+	});
+	</script>
+</body>
+</html>

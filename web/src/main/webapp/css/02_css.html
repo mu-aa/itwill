@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CSS</title>
+<!-- style 태그 : 웹문서에 작성된 태그(박스모델)에 CSS 스타일을 적용시키기 위한 태그 -->
+<style type="text/css">
+/* CSS 주석문 */
+/*
+Selector[, Selector, ...][:paduo-class] {
+	Property: Value [Value Value ...]
+	Property: Value [Value Value ...]
+	...
+}
+*/
+
+/* 선택자(Selector) : 태그(박스모델 - Element)를 선택하기 위한 표현식 */
+h1 {
+	text-align: center;
+}
+
+p {
+	font-size: 20px; 
+	color: red;
+}
+
+p:nth-child(2n) { /* 가상선택자 */
+	color: green;
+}
+</style>
+</head>
+<body>
+	<!-- CSS(Cascading Style Sheets) : HTML 언어로 작성된 웹문서에 모양과 서식을 제공하기 위한 스타일 시트 언어 -->
+	<!-- HTML의 태그(박스모델)를 이용하여 웹문서를 구성하고 1태그의 디자인은 CSS를 사용하여 적용 -->
+	<!-- ㄴ 웹문서 작성에 대한 생산성 및 유지보수의 효율성 증가 -->
+	<h1>CSS Style</h1>
+	<hr>
+	<p>브라우저에 출력될 내용</p>
+	<p>브라우저에 출력될 내용</p>
+	<p>브라우저에 출력될 내용</p>
+	<p>브라우저에 출력될 내용</p>
+	<p>브라우저에 출력될 내용</p>
+</body>
+</html>

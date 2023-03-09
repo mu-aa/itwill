@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+<style type="text/css">
+#itemListDiv div{
+	margin: 5px;
+}
+</style>
+</head>
+<body>
+	<h1>이벤트(Event) - DHTML(Dynamic HTML)</h1>
+	<hr>
+	<p>DHTML : 태그에서 이벤트가 발생될 경우 태그에 대한 Element 객체를 조작하여 동적인 페이지를 제공하는 기능</p>
+	<hr>
+	<button type="button" id="addBtn">아이템 추가</button>
+	<div id="itemListDiv"></div>
+	
+	<script type="text/javascript">
+	var count=0;
+	
+	document.getElementById("addBtn").onclick=function() {
+		count++; //태그를 구분하기 위한 값을 저장하기 위한 변수
+		
+		var newItem=document.createElement("div"); //<div></div>
+		newItem.setAttribute("id", "item_"+count); //<div id="item_XXX"></div> - XXX:count
+		var html="아이템["+count+"]&nbsp;&nbsp;";
+		html+="<button type='button' onclick='removeItem("+count+");'>삭제</button>";
+		newItem.innerHTML=html;//<div id="item_XXX">아이템[XXX] [삭제]</div>
+		
+		document.getElementById("itemListDiv").appendChild(newItem); //DOM Tree에 newItem 버튼 부착
+	}
+	
+	function removeItem(cnt) {
+		var removeElement=document.getElementById("item_"+cnt);
+		document.getElementById("itemListDiv").removeChild(removeElement);
+	}
+	</script>
+</body>
+</html>

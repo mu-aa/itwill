@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+</head>
+<body>
+	<h1>Number 클래스 함수</h1>
+	<hr>
+	<p>숫자값이 저장된 객체를 생성하기 위한 클래스 함수 - 객체에 대한 프로퍼티와 메소드 제공</p>
+	<script type="text/javascript">
+	
+	//매개변수에 전달된 숫자값이 저장된 Number 객체를 생성하여 변수에 저장
+	/*
+	var num=new Number(100);
+	
+	alert("변수의 자료형 = "+typeof(num)); //object
+	alert("num.toString() = "+num.toString()); //100 - toString() 생략 가능
+	*/
+	
+	/*
+	var num=new Number("100"); //전달된 문자값을 숫자값으로 변환하여 Number 객체에 저장
+	//alert(num);
+	
+	//Number.toString(radix) : Number 객체에 저장된 숫자값을 원하는 진수형태의 문자값으로 변환하여 반환
+	//alert("num.toString(2) = "+num.toString(2)); //1100100
+	//alert("num.toString(8) = "+num.toString(8)); //144
+	//alert("num.toString(16) = "+num.toString(16)); //64
+	
+	//Number.valueOf() : Number 객체에 저장된 숫자값을 반환하는 메소드
+	var su=num.valueOf();
+	//alert("변수의 자료형 = "+typeof(su)); //number;
+	//alert("su = "+su); //su = 100
+	
+	//자바스크립트는 모든 값을 객체로 처리
+	//ㄴ number 자료형의 변수에 저장된 값은 내부적으로 Number 객체로 처리
+	//ㄴ number 자료형의 변수는 Number 클래스 함수의 프로퍼티와 메소드 사용 가능
+	alert("su.toString(2) = "+su.toString(2));
+	*/
+	
+	/*
+	var num=new Number(100);
+	
+	//Number 객체에 요소 추가
+	num.display=function() {
+		alert("Number 객체의 display() 메소드의 명령 실행");
+	}
+	
+	num.display();
+	*/
+	
+	//number 자료형의 변수에는 객체의 요소 추가 불가능 - 에러 발생
+	/*
+	var num=100;
+	
+	num.display=function() {
+		alert("Number 객체의 display() 메소드의 명령 실행");
+	}
+	
+	num.display();
+	*/
+	
+	/* 
+	var num="100";
+	alert("변수의 자료형 = "+typeof(num)); //string
+	alert("결과 = "+(num+200)); //100200
+	//Number(string) : 문자값을 전달받아 숫자값으로 변환하여 반환하는 함수 - NaN 발생 주의
+	alert("결과 = "+(Number(num)+200)); //300 
+	*/
+	
+	/*
+	var num=12.3456789;
+	alert("num = "+num); //12.3456789
+	
+	//Number.toFixed(digits) : Number 객체에 저장된 숫자값에서 매개변수로 전달받은
+	//	소수점 자릿수(0~20)까지의 문자값을 변환하여 반환하는 메소드
+	alert("num.toFixed(0) = "+num.toFixed(0)); //12
+	alert("num.toFixed(0) = "+num.toFixed(1)); //12.3
+	alert("num.toFixed(0) = "+num.toFixed(2)); //12.35
+	*/
+	
+	alert("자바스크립트에서 표현 가능한 최대 숫자값 = "+Number.MAX_VALUE);
+	alert("자바스크립트에서 표현 가능한 최소 숫자값 = "+Number.MIN_VALUE);
+	</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+</head>
+<body>
+	<h1>DOM(Document Object Model) - Element 객체 생성 및 추가</h1>
+	<hr>
+	<div id="imageDiv"></div>
+	<script type="text/javascript">
+	
+	//document.createElement(nodeName) : 전달값의 태그명을 가진 Element 객체를 생성하여 반환하는 메소드 - 태그 생성
+	var h2E=document.createElement("h2"); //<h2></h2>
+	//alert(h2E); //[object HTMLHeadingElement]
+	
+	//document.createTextNode(content) : 태그내용을 전달값으로 가진 Text 객체를 생성하여 반환하는 메소드 - 태그내용 생성
+	var h2T=document.createTextNode("h2 태그의 내용");
+	//alert(h2T); //[object Text]
+	
+	//★Node.appendChild(newNode) : Node(Element) 객체의 마지막 자식 Node 객체로 추가하는 메소드 
+	h2E.appendChild(h2T); //<h2>h2 태그의 내용</h2>
+	
+	//document.body : body 태그를 객체로 표현 가능 - 웹문서에 하나의 태그만 존재
+	//alert(document.body); //[object HTMLBodyElement]
+	document.body.appendChild(h2E); //DOM Tree에 Node 객체 배치 >> 출력
+	
+	var imgE=document.createElement("img"); //<img>
+	
+	/*
+	//Element.attributeName : Element 객체의 프로퍼티로 태그의 속성 표현 가능
+	imgE.src="images/1.png"; //<img scr="images/1.png">
+	//alert(imgE.src); //http://localhost:8000/web/js/images/1.png - 절대경로
+	
+	imgE.width="300"; //<img scr="images/1.png" width="300">
+	*/
+	
+	//Element.setAttribute(name, value) : Element 객체의 태그 속성을 변경하는 메소드
+	imgE.setAttribute("src", "images/1.png");
+	
+	//Elemet.getAttribute(name) : Element 객체의 태그 속성값을 반환하는 메소드
+	//alert(imgE.getAttribute("src")); //images/1.png - 상대경로
+	
+	imgE.setAttribute("width", "300");
+	
+	//Element 객체를 반환받아 마지막 자식 Element 객체로 태그 배치 - 출력
+	var imageDiv=document.getElementById("imageDiv");
+	imageDiv.appendChild(imgE);
+	
+	var hrE=document.createElement("hr"); //<hr>
+	//alert(hrE); //[object HTMLHRElement]
+	
+	//Node.insertBefore(newElement, before) : 기존 Node(Element) 객체 전에 새로운 Node(Element) 객체 삽입 메소드
+	document.body.insertBefore(hrE, h2E);
+	</script>
+</body>
+</html>

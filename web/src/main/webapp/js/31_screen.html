@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+</head>
+<body>
+	<h1>BOM(Browser Object Model) - screen 객체</h1>
+	<hr>
+	<p>screen 객체 : 브라우저가 출력될 출력장치(모니터)를 객체로 표현하여 프로퍼티와 메소드 제공</p>
+	<script type="text/javascript">
+	
+	//screen.width : 브라우저가 출력될 출력장치(모니터)의 폭을 저장한 프로퍼티
+	var width=screen.width;
+	//alert("width = "+width); //해상도(가로) - 1920
+	
+	//screen.height : 브라우저가 출력될 출력장치(모니터)의 높이를 저장한 프로퍼티
+	var height=screen.height; 
+	//alert("height = "+height); //해상도(세로) - 1080
+	
+	//자식 브라우저를 생성하여 변수에 저장
+	var win=window.open("", "", "width=400, height=300, top=100, left=400");
+	
+	//Window.moveTo(x, y) : 브라우저의 출력좌표를 변경하는 메소드 - 출력위치 이동
+	win.moveTo(0, 0);
+	
+	//Window.resizeTo(width, height) : 브라우저의 폭과 높이를 변경하는 메소드 - 크기 변경
+	win.resizeTo(width, height); //모니터 크기만큼 출력
+	
+	var intervalId=setInterval(function () {
+		//Window.moveBy(x, y) : 브라우저의 현재 위치를 기준으로 출력좌표를 변경하는 메소드 - 출력좌표 변경
+		win.moveBy(50, 50);
+		//Window.resizeBy(width, height) : 브라우저의 현재 크기를 기준으로 폭과 높이를 변경하는 메소드 - 크기 변경
+		win.resizeBy(-100, -100);
+	}, 500);
+	
+	setTimeout(function() {
+		clearInterval(intervalId);
+		win.close();
+	}, 5000);
+	</script>
+</body>
+</html>

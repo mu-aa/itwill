@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+	<h1>태그(Element 객체)의 이동</h1>
+	<hr>
+	<div id="imageList"></div>
+	
+	<script type="text/javascript">
+	//새로운 태그(Element 객체)를 생성하여 선택자로 검색된 태그에 추가하는 메소드
+	//ㄴ append, prepend, before, after
+	for(i=0;i<=9;i++) {
+		$("#imageList").append("<img src='images/"+i+".png' width='150'>");
+	}
+	
+	//선택자로 검색된 태그를 타겟 선택자로 검색된 태그에 이동하는 메소드
+	//ㄴ appendTo, prependTo, insertBefore, isnertAfter
+	//ㄴ 새로운 태그를 생성하여 이동 가능
+	setInterval(function() {
+		$("#imageList").children(":eq(0)").appendTo($("#imageList"));
+	}, 1000);
+	</script>
+</body>
+</html>

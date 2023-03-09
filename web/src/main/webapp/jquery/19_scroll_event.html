@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+	<h1>Scroll Event</h1>
+	<hr>
+	<div id="displayDiv"></div>
+	
+	<script type="text/javascript">
+	function displayImage() {
+		for(i=0;i<=9;i++) { //div(박스태그)로 설정해 한 줄에 하나의 이미지만 출력
+			$("#displayDiv").append("<div><img src='images/"+i+".png' width='100'></div>");
+		}
+	}
+	
+	displayImage();
+	
+	//$(selector).scroll(callback) : 선택자로 검색된 태그(window 객체)에서 스크롤 이벤트가 발생된 경우
+	//콜백함수를 호출하는 메소드
+	$(window).scroll(function() {
+		//alert("스크롤 이벤트 발생");
+		
+		//$(selector).height() : 선택자로 검색된 태그의 높이를 반환하는 메소드
+		var docH=$(document).height();
+		//alert(docH); //1223
+		//alert($(window).height()); //937
+		
+		//$(selector).scrollTop() : 선택자로 검색된 태그의 스크롤 최상단부 위치값을 반환하는 메소드
+		var scrollH=$(window).height()+$(window).scrollTop();
+		
+		//★스크롤 처리
+		if(scrollH >= docH) { //스크롤의 최상단부가 출력 영역(document 객체)보다 아래에 위치한 경우
+			displayImage();   //이미지 출력
+		}
+	});
+	</script>
+</body>
+</html>

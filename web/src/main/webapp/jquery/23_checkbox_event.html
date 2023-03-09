@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<style type="text/css">
+#terms {
+	width: 400px;
+	margin: 0 auto;
+	padding: 5px 10px;
+	border: 1px solid black;
+}
+
+h3 {
+	text-align: center;
+}
+
+#agree {
+	width: 400px;
+	margin: 0 auto;
+	text-align: center; 
+}
+
+#agreeDiv {
+	margin: 10px;
+}
+</style>
+</head>
+<body>
+	<h1>Checkbox Event</h1>
+	<hr>
+	<div id="terms">
+		<h3>약관</h3>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+		<p>무슨 내용인지 이해할 수 없는 어려운 내용입니다.</p>
+	</div>
+	<div id="agree">
+		<form action="22_input_required.html" method="post" id="termsForm">
+			<div>
+				<input type="checkbox" name="agreeCheck" id="agreeCheck" value="0">
+				약관에 동의해 주세요.
+			</div>
+			<button type="submit">확인</button>
+			<div id="message" style="color: red;"></div>
+		</form>
+	</div>
+	
+	<script type="text/javascript">
+	var check=0; //0:약관미동의, 1:약관동의
+	
+	//$(selector).change(callback) :  선택자로 검색된 태그(입력태그)의 입력값이 변경된 경우 콜백함수를 호출하는 메소드
+	$("#agreeCheck").change(function() {
+		//$(selector).is(status) : 선택자로 검색된 태그(입력태그)의 상태를 비교하여 [false] 또는 [true]를 반환하는 메소드
+		//ㄴ input 태그(type 속성값 - checkbox 또는 radio), select 태그(option 태그)에서만 사용 가능한 메소드
+		if($(this).is(":checked")) { //이벤트가 발생된 태그(checkbox, radio)가 선택 상태(checked)인 경우
+			check=1;
+		} else {
+			check=0;
+		}
+		
+		//입력 태그의 입력값 변경
+		$(this).val(check);
+	});
+	
+	$("#termsForm").submit(function() {
+		if(check==0) {
+			$("#message").text("약관을 읽고 동의해 주세요.");
+			return false;
+		}
+	});
+	</script>
+</body>
+</html>

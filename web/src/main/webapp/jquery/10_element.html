@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+	<h1>태그(Element 객체)의 추가와 삭제</h1>
+	<hr>
+	<div id="imageList1"></div>
+	<hr>
+	<div id="imageList2"></div>
+	<hr>
+	<div id="imageList3">
+		<img alt="숫자이미지" src="images/1.png" width="200">
+		<img alt="숫자이미지" src="images/2.png" width="200">
+		<img alt="숫자이미지" src="images/3.png" width="200">
+	</div>
+	
+	<script type="text/javascript">
+	//$(tag) : HTML 태그를 전달받아 jQuery 객체를 반환 - 태그(Element 객체) 생성
+	//[$변수명] 형식으로 jQuery 객체를 저장한 변수를 표현 - jQuery 메소드 호출
+	var $image=$("<img src='images/1.png' width='200'>");
+	
+	//$(selector).appendTO(targetSelector) : 선택자로 태그를 검색하여 타겟 선택자의 태그에 
+	//	마지막 자식 태그로 추가하는 메소드
+	$image.appendTo($("#imageList1"));
+	$("<img src='images/2.png' width='200'>").appendTo($("#imageList1"));
+	
+	//$(selector).prependTo(targetSelector) : 선택자로 태그를 검색하여 타겟 선택자의 태그에 
+	//첫번째 자식 태그로 추가하는 메소드
+	//ㄴ 기존 태그를 검색하여 이동하거나 새로운 태그를 생성하여 이동
+	$("<img src='images/3.png' width='200'>").prependTo($("#imageList1"));
+	$("<img src='images/4.png' width='200'>").prependTo($("#imageList1"));
+	
+	////$(selector).insertBefore(targetSelector) : 선택자로 태그를 검색하여 타겟 선택자의 태그에 
+	//이전 태그로 추가하는 메소드
+	//ㄴ 기존 태그를 검색하여 이동하거나 새로운 태그를 생성하여 이동
+	$("<img src='images/5.png' width='200'>").insertBefore($("#imageList1 img[src='images/1.png']"));
+	
+	////$(selector).insertAfter(targetSelector) : 선택자로 태그를 검색하여 타겟 선택자의 태그에 
+	//다음 태그로 추가하는 메소드
+	//ㄴ 기존 태그를 검색하여 이동하거나 새로운 태그를 생성하여 이동
+	$("<img src='images/6.png' width='200'>").insertAfter($("#imageList1 img[src='images/1.png']"));
+	
+	//$(selector).append(newItem) : 매개변수로 전달된 태그를 생성, 선택자로 태그를 검색하여
+	//마지막 자식 태그로 추가하는 메소드 - 새로운 이미지를 만들어서 삽입
+	$("#imageList2").append("<img src='images/1.png' width='200'>");
+	$("#imageList2").append("<img src='images/2.png' width='200'>");
+	
+	//$(selector).prepend(newItem) : 매개변수로 전달된 태그를 생성, 선택자로 태그를 검색하여
+	//첫번째 자식 태그로 추가하는 메소드
+	$("#imageList2").prepend("<img src='images/3.png' width='200'>");
+	$("#imageList2").prepend("<img src='images/4.png' width='200'>");
+	
+	//$(selector).before(newItem) : 매개변수로 전달된 태그를 생성, 선택자로 태그를 검색하여
+	//이전 태그로 추가하는 메소드
+	$("#imageList2 img[src='images/1.png']").before("<img src='images/5.png' width='200'>");
+	
+	//$(selector).after(newItem) : 매개변수로 전달된 태그를 생성, 선택자로 태그를 검색하여
+	//다음 태그로 추가하는 메소드
+	$("#imageList2 img[src='images/1.png']").after("<img src='images/6.png' width='200'>");
+	
+	//$(selector).remove() : 선택자로 검색된 태그(Elememt 객체)를 삭제하는 메소드
+	//ㄴ remove 메소드의 매개변수에 선택자를 전달하여 특정 태그만 선택하여 삭제 가능
+	//$("#imageList3").remove(); //선택된 태그의 후손 태그로 함께 삭제
+	//$("#imageList3").children(":eq(1)").remove();
+	//$("#imageList3").children().eq(1).remove();
+	$("#imageList3").children().remove(":eq(1)");
+	</script>
+</body>
+</html>

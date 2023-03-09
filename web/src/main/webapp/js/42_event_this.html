@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+<style type="text/css">
+#displayDiv {
+	border: 1px solid red;
+}
+</style>
+</head>
+<body>
+	<h1>이벤트(Event) - this</h1>
+	<hr>
+	<p>이벤트 처리 함수에서 이벤트가 발생된 태그(Element 객체)를 표현하기 위해 this 키워드 사용</p>
+	<hr>
+	<div id="displayDiv">이벤트 처리</div>
+	<ul>
+		<li>menu-1</li>
+		<li>menu-2</li>
+		<li>menu-3</li>
+	</ul>
+	<script type="text/javascript">
+	
+	document.getElementById("displayDiv").onclick=function() {
+		//alert("태그에서 클릭 이벤트가 발생 되었습니다.")
+		
+		//Element 객체(태그)의 style 속성값을 변경 - CSS 스타일 변경
+		//document.getElementById("displayDiv").style="color: aqua;";
+		
+		//함수 안에서 이벤트 발생 태그(document.getElementById("displayDiv"))를 this 키워드로 대체 가능
+		this.style="color: aqua;";
+	}
+	
+	var liList=document.getElementsByTagName("li");
+	
+	/*
+	liList.item(0).onclick=function() {
+		//liList.item(0).style="color: orange;";
+		this.style="color: orange";
+	}
+	liList.item(1).onclick=function() {
+		//liList.item(1).style="color: orange;";
+		this.style="color: orange";
+	}
+	liList.item(2).onclick=function() {
+		//liList.item(2).style="color: orange;";
+		this.style="color: orange";
+	}
+	*/
+	
+	for(i=0;i<liList.length;i++) {
+		//반복문 내부에서 List 객체에 저장된 모든 Element 객체에 이벤트 처리 함수 등록
+		//ㄴ 이벤트 처리 함수는 이벤트가 발생된 후 호출되어 실행
+		liList.item(i).onclick=function() {
+			//이벤트 처리 명령은 반복문 종료 후 실행
+			//alert("i = "+i); //i = 3
+			//liList.item(i).style="color: orange"; //liList.item(3) >> null
+			
+			this.style="color: orange;";
+		}
+	}
+	</script>
+</body>
+</html>

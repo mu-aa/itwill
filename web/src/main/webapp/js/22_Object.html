@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+</head>
+<body>
+	<h1>Object 클래스 함수</h1>
+	<hr>
+	<p>요소가 하나도 선언되어 있지 않은 클래스 함수 - 요소가 없는 객체 생성</p>
+	<p>생성된 Object 객체에 필요한 요소를 추가하여 사용 - 원하는 요소의 객체를 하나만 생성</p>
+	<script type="text/javascript">
+	
+	/*
+	var student=new Object(); //요소가 하나도 없는 객체 생성 - Empty Object
+	//객체변수를 출력하면 객체를 생성한 클래스 함수명을 제공받아 출력
+	//alert(student); //[object Object]
+	
+	//Object 객체에 요소 추가
+	student.num=1000; //프로퍼티 추가
+	student.name="홍길동";
+	student.address="서울시 강남구";
+		
+	student.display=function() { //메소드 추가
+		alert("학번 = "+this.num+", 이름 = "+this.name+", 주소 = "+this.address);
+	}
+	
+	student.display();
+	*/
+	
+	
+	/*
+	//자바스크립트에서는 Object 객체를 보다 쉽게 생성하기 위해 JSON 기능 제공
+	//JSON(JavaScript Object Notation) : 자바스크립트 객체 표기법
+	//ㄴ 자바스크립트에서 객체를 쉽게 생성하기 위해 제공되는 방법
+	//ㄴ Object 객체 : {}, Array 객체 : []
+	var student={};
+	//alert(student); //[object Object]
+	
+	//Object 객체에 요소 추가
+	student.num=1000; //프로퍼티 추가
+	student.name="홍길동";
+	student.address="서울시 강남구";
+		
+	student.display=function() { //메소드 추가
+		alert("학번 = "+this.num+", 이름 = "+this.name+", 주소 = "+this.address);
+	}
+	
+	student.display();
+	*/
+	
+	
+	//★JSON을 이용하여 객체를 생성하면 객체 생성 시 요소 추가 가능
+	//형식) var 변수명={"요소명":"값", "요소명":"함수", ...};
+	/*
+	var student={"num":1000, "name":"홍길동", "address":"서울시 강남구"
+		,display:function(){
+			alert("학번 = "+this.num+", 이름 = "+this.name+", 주소 = "+this.address);
+		}
+	};
+	student.display();
+	*/
+	
+	//ES6에서 Object 객체에서 메소드를 간결하게 표현 가능
+	var student={num:1000, name:"홍길동", address:"서울시 강남구"
+		,display() {
+			alert("학번 = "+this.num+", 이름 = "+this.name+", 주소 = "+this.address);
+		}
+	};
+	
+	student.display();
+	</script>
+</body>
+</html>

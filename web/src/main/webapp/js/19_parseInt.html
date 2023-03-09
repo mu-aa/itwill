@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+</head>
+<body>
+	<h1>내장함수 - 숫자 변환 관련 함수</h1>
+	<hr>
+	<p>parseInt(value) : 전달값을 정수값으로 변환하여 반환하는 함수</p>
+	<p>parseFloat(value) : 전달값을 실수값으로 변환하여 반환하는 함수</p>
+	
+	<script type="text/javascript">
+	
+	/*
+	var result=50/3;
+	
+	alert("결과 = "+result); //16.666666666666668
+	alert("결과 = "+parseInt(result)); //16
+	
+	//parseInt(value, redix) : 원하는 진수의 값(문자값)을 전달받아 10진수의 정수값으로 변환하여 반환
+	//ㄴ  매개변수에 값만 전달할 경우 자동으로 10진수로 처리
+	//alert("16진수 : 123 = 10진수 : "+parseInt(123, 16));
+	//alert("8진수 : 123 = 10진수 : "+parseInt(123, 8));
+	
+	//alert("16진수 : 123 = 10진수 : "+parseInt(123, 16));
+	alert("16진수 : abc = 10진수 : "+parseInt("abc", 16));
+	
+	var num="100";
+	//alert(num+200); //100200
+	//문자값을 parseInt 함수를 이용하여 숫자값으로 변환하여 반환
+	//alert(parseInt(num)+200); //300
+	alert(Number(num)+200); //300
+	
+	var su="10.5";
+	//alert(su+20); //10.520
+	//alert(parseFloat(su)+20); //30.5
+	alert(Number(su)+20); //30.5
+	*/
+	
+	/*
+	var num="100";
+	alert(Number(num)+200); 
+	alert(parseInt(num)+200);
+	*/
+
+	var num="100abc";
+	//Number 함수는 전달받은 문자값에 숫자가 아닌 문자가 있는 경우 NaN 반환
+	alert(Number(num)+200); //NaN
+	//parseInt 함수 또는 parseFloat 함수는 전달받은 문자값의 앞부분의 숫자값만 잘라내어 숫자값으로 변환
+	//ㄴ 숫자가 아닌 문자로 시작될 경우 NaN 반환
+	alert(parseInt(num)+200); //300
+	</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CSS</title>
+<style type="text/css">
+img {
+	border: 1px solid black;
+}
+
+.image {
+	float: left;
+	margin: 20px;
+	background: rgba(0, 0, 255, 0.3);
+	
+	/* perspective : Z 영역 관련 스타일 속성 */
+	/* 속성값 : Z 영역에 대한 깊이를 px 단위로 설정 */
+	perspective: 200px;
+	
+	/* transform-style : 박스모델 차원 관련 스타일 속성 */
+	/* 속성값 : flat(default - 2d), preserve(3d) */
+	transform-style: preserve-3d;
+}
+
+/* transform : 박스모델 변형 관련 스타일 속성 */
+/* 속성값 : 변형 관련 함수 - translate, scale, rotate, skew 등 */
+.translate img {
+	/* translate(x, y) : 박스모델을 가로(X)와 세로(Y) 방향으로 아등하는 함수 - 단위 : px */
+	transform: translate(20px, 20px);
+}
+
+#translatex img {
+	/* translatex(x) : 박스모델을 가로(X) 방향으로 이동하는 함수 - 단위 : px */
+	transform: translatex(20px);
+}
+
+#translatey img {
+	/* translatey(y) : 박스모델을 세로(Y) 방향으로 이동하는 함수 - 단위 : px */
+	transform: translatey(-20px);
+}
+
+#translatez img {
+	/* translatez(z) : 박스모델을 원근(Z) 방향으로 이동하는 함수 - 단위 : px */
+	transform: translatez(-20px);
+}
+
+#translate3d img {
+	/* translate3d(x, y, z) : 박스모델을 입체적으로 이동하는 함수 - 단위 : px */
+	transform: translate3d(-20px, -20px, -20px);
+}
+
+
+</style>
+</head>
+<body>
+	<h1>박스모델 변형 관련 스타일 속성</h1>
+	<hr>
+	<div id="original">
+		<h3>원본이미지</h3>
+		<img alt="펜션 이미지" src="images/1.png">
+	</div>
+	<div id="translate" class="image">
+		<img alt="펜션 이미지" src="images/1.png">
+	</div>
+	<div id="translatex" class="image">
+		<img alt="펜션 이미지" src="images/1.png">
+	</div>
+	<div id="translatey" class="image">
+		<img alt="펜션 이미지" src="images/1.png">
+	</div>
+	<div id="translatez" class="image">
+		<img alt="펜션 이미지" src="images/1.png">
+	</div>
+	<div id="translate3d" class="image">
+		<img alt="펜션 이미지" src="images/1.png">
+	</div>
+</body>
+</html>

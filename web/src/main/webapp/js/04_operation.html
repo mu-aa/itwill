@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+</head>
+<body>
+	<h1>자바스크립트 연산자</h1>
+	<hr>
+	<!-- 연산자 우선 순위에 의한 분류 -->
+	<p>최우선 연산자 : (), [], {}, .</p>
+	<p>단항 연산자 : +, -, ++, --, !, new, typeof</p>
+	<p>산술 연산자 : *, /, %, +, -</p>
+	<p>관계(비교) 연산자 : &gt;(>), &gt;=(>=), &lt;(<), &lt;=(<=), ==, !=, ===, !==, instanceof(ES6)</p>
+	<p>논리 연산자 : &amp;&amp;(&&), ||</p>
+	<p>대입 연산자 : =, *=, /=, %=, +=, -=</p>
+	
+	<script type="text/javascript">
+	var num=123;
+	alert("변수값 = "+num); //123
+	alert("자료형 = "+typeof(num)); //number
+	
+	num="123";
+	alert("변수값 = "+num); //123
+	alert("자료형 = "+typeof(num)); //string
+	
+	//== 또는 != 연산자는 자료형 상관없이 값만 비교
+	alert("비교 결과1 = "+(num==123)); //true
+	alert("비교 결과2 = "+(num!=123)); //false
+	
+	//=== 또는 !== 연산자는 자료형과 값을 비교
+	alert("비교 결과3 = "+(num===123)); //false
+	alert("비교 결과4 = "+(num!==123)); //true
+	</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+</head>
+<body>
+	<h1>Form 태그 관련 이벤트</h1>
+	<hr>
+	<form action="47_event_action.html" method="post" name="loginForm">
+	<table>
+		<tr>
+			<td>아이디</td>
+			<td><input type="text" name="id"></td>
+		</tr>
+		<tr>
+			<td>비밀번호</td>
+			<td><input type="password" name="passwd"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><button type="submit">로그인</button></td>
+		</tr>
+	</table>
+	</form>
+	
+	<script type="text/javascript">
+	loginForm.id.focus();
+	
+	//form 태그에서 제출 이벤트(Submit Event)가 발생될 경우 호출되는 이벤트 처리 함수 등록
+	loginForm.onsubmit=function() {
+		if(loginForm.id.value=="") {
+			alert("아이디를 입력해주세요.");
+			loginForm.id.focus();
+			
+			/*
+			event.preventDefault(); //태그의 기본 이벤트 중지
+			return;
+			*/
+			
+			//이벤트 처리 함수에서 [false] 반환하면 기본 이벤트 제거 및
+			//이벤트 전달 중지되며 이벤트 처리 함수 종료
+			return false; // => event.preventDefault() + event.stopPropagation() 와 동일함
+		}
+	
+		var idReg=/^[a-zA-Z]\w{5,19}$/g;
+	
+		if(!idReg.test(loginForm.id.value)) {
+			alert("아이디를 형식에 맞게 입력해주세요.");
+			loginForm.id.focus();
+			return false;
+		}
+
+		if(loginForm.passwd.value==""){
+			alert("비밀번호를 입력해주세요.");
+			loginForm.passwd.focus();
+			return false;
+		}
+		
+		var passwdReg=/^(?=.*[a-zA-Z])(?=.*[~!@#$%^&*_-]).{8,30}$/g;
+		if(!passwdReg.test(loginForm.passwd.value)) {
+			alert("비밀번호를 형식에 맞게 입력해주세요.");
+			loginForm.passwd.focus();
+			return false;
+		}
+	}	
+	</script>
+</body>
+</html>

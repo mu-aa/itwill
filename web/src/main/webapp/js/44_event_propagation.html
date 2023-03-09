@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+<style type="text/css">
+div {
+	border: 1px solid black;
+	padding: 30px;
+	text-align: center;
+}
+
+#one {
+	background: red;
+}
+#two {
+	background: orange;
+}
+#three {
+	background: yellow;
+}
+</style>
+</head>
+<body>
+	<h1>이벤트(Event) - 이벤트 전달(Event - Propagation)</h1>
+	<hr>
+	<p>이벤트 전달 : 태그에서 발생된 이벤트가 다른 태그로 전달 - 캡쳐링 >> 타겟 >> 버블링</p>
+	<p>캡쳐링(Capturing) 단계 : 이벤트가 부모 태그에서 자식 태그로 전달</p>
+	<p>타겟(Target) 단계: 이벤트가 발생된 태그로 전달</p>
+	<p>버블링(Burbling) 단계: 이벤트가 자식 태그에서 부모 태그로 전달</p>
+	<hr>
+	<div id="one">
+		<div id="two">
+			<div id="three"></div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+	document.getElementById("one").onclick=function() {
+		location.href="https://www.daum.net";
+		//event.stopPropagation() : 이벤트 전달을 중지하는 메소드
+		//ㄴ 버블링 단계에서 부모 태그에도 이벤트 발생하는 것을 방지
+		event.stopPropagation();
+	}
+	document.getElementById("two").onclick=function() {
+		location.href="https://www.naver.com";
+		event.stopPropagation();
+	}
+	document.getElementById("three").onclick=function() {
+		location.href="https://www.google.com";
+		event.stopPropagation();
+	}
+	</script>
+</body>
+</html>

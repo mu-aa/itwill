@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CSS</title>
+<style type="text/css">
+table {
+	/* margin 속성값으로 auto를 설정한 경우 라인의 가운데에 박스모델 배치 - 박스모델의 폭 변경 */
+	margin: 0 auto;
+	
+	/* border 속성값으로 inset 또는 outset을 설정하면 외곽선 명암 효과 제공 */
+	border: 3px outset;
+	
+	/* border-spacing : 외곽선 간격 관련 스타일 속성 - 속성값 단위 : px, % */
+	border-spacing: 10px;
+}
+
+th, td {
+	height: 30px;
+	padding: 5px;
+	text-align: center;
+	border: 3px inset;
+	
+	/* empty-cells : 셀의 출력될 내용이 없는 경우에 대한 처리 관련 스타일 속성 */
+	/* 속성값 : show(default - 출력), hide(미출력) */
+	empty-cells: hide;
+}
+
+.num {
+	width: 50px;
+}
+
+.name {
+	width: 1000px;
+}
+
+.address {
+	width: 250px;
+}
+
+caption {
+	font-size: 1.5em;
+	letter-spacing: 10px;
+	
+	/* caption-side : 표 제목 출력 위치 관련 스타일 속성 */
+	/* 속성값 : top(default), bottom, left, right */
+	caption-side: bottom;
+}
+</style>
+</head>
+<body>
+	<h1>테이블 관련 스타일 속성</h1>
+	<hr>
+	<table>
+		<caption>회원목록</caption>
+		<tr>
+			<th class="num">번호</th><th class="name">이름</th><th class="address">주소</th>
+		</tr>
+		<tr>
+			<td>1000</td><td>홍길동</td><td>서울시 강남구 역삼동</td>
+		</tr>
+		<tr>
+			<td>2000</td><td>임꺽정</td><td>서울시 종로구 종로1가</td>
+		</tr>
+		<tr>
+			<!-- <td>3000</td><td>전우치</td><td>서울시 동작구 사당동</td> -->
+			<td>3000</td><td>전우치</td><td></td>
+		</tr>
+	</table>
+</body>
+</html>

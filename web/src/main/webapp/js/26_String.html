@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+</head>
+<body>
+	<h1>String 클래스 함수</h1>
+	<hr>
+	<p>문자값이 저장된 객체를 생성하기 위한 클래스 함수 - 객체에 대한 프로퍼티와 메소드 제공</p>
+	<script type="text/javascript">
+	
+	var text=new String("Hello, JavaScript");
+	
+	//alert("text.toString()"+text.toString());
+	//alert("text"+text); //toString() 생략 가능
+	
+	//String.length : String 객체에 저장된 문자값의 문자 갯수를 저장한 프로퍼티
+	//alert("text.length = "+text.length);
+	
+	//String.charAt(index) : String 객체에 저장된 문자값에서 첨자(Index) 위치의 하나의 문자값을 반환하는 메소드
+	//alert("text.charAt(7) = "+text.charAt(7));
+	
+	//문자값은 내부적으로 배열로 처리되므로 [ ] 연산자에 첨자를 사용하여 요소로 표현한 하나의 문자값을 제공받아 사용 가능
+	//alert("text[7] = "+text[7]);
+	
+	//String.indexOf(string) : String 객체에 저장된 문자값에서 매개변수에 전달된
+	//	 문자값을 검색하여 시작첨자(Index)를 반환하는 메소드 - 검색 문자값이 없는 경우 -1을 반환
+	//alert("text.indexOf('Script') = "+text.indexOf('Script'));
+	
+	//String.replace(search, replace) : String 객체에 저장된 문자값에서 매개변수에 전달된 첫번째 문자값을
+	//	검색하여 두번째 문자값으로 변환하여 반환하는 메소드
+	//alert("text.replace('Hello', 'Hi') = "+text.replace('Hello', 'Hi'));
+	
+	//alert("text.toUpperCase() = "+text.toUpperCase()); //String 객체에 저장된 문자값을 대문자로 변환하여 반환하는 메소드
+	//alert("text.toLowerCase() = "+text.toLowerCase()); //String 객체에 저장된 문자값을 소문자로 변환하여 반환하는 메소드
+
+	//String.substring(from, to) : String 객체에 저장된 문자값에서 시작첨자(from - 포함)부터 
+	//	종료첨자(to - 미포함)까지 범위의 문자값을 잘라내어 반환하는 메소드
+	//alert("text.substring(7, 11) = "+text.substring(7, 11));
+	
+	//String.substr(from, length) : String 객체에 저장된 문자값에서 시작첨자(from)부터 
+	//	원하는 갯수(length)의 문자값을 잘라내어 반환하는 메소드
+	//alert("text.substr(7, 4) = "+text.substr(7, 4));
+	
+	//String.split(pattern) : String 객체에 저장된 문자값을 패턴문자(정규표현식)로 분리하여
+	//분리된 문자값들이 요소로 저장된 Array 객체로 반환하는 메소드
+	//var [string1, string2]=text. split(" ");
+	//alert(string1+" >> "+string2);
+	
+	var text="ABCDEFG";
+	
+	//string 자료형의 변수에 저장된 값은 내부적으로 String 객체로 처리
+	//ㄴ string 자료형의 변수로 String 클래스 함수의 프로퍼티와 메소드 사용 가능
+	alert("text.length = "+text.length);
+	</script>
+</body>
+</html>

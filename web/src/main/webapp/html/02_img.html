@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTML</title>
+</head>
+<body>
+	<h1>img 태그</h1>
+	<hr>
+	<!-- img 태그 : 웹서버에 저장된 이미지 파일을 제공받아 출력하기 위한 태그 -->
+	<!-- ㄴ 웹에서 사용하는 이미지 파일 : GIF, PNG, JPEG 등.. -->
+	<!-- alt 속성 : 출력 이미지에 대한 설명을 속성값으로 설정 - 음성 지원 -->
+	<!-- src 속성 : 웹서버에 저장된 이미지 파일의 URL 주소를 속성값으로 설정 -->
+	<!-- ㄴ src 속성값으로 설정된 URL 주소에 이미지 파일이 없는 경우 404 상태코드(Not Found) 발생 -->
+	<img alt="images" src="http://localhost:8000/web/html/images/a.png" width="200">
+
+	<!-- img 태그의 폭을 변경하여 이미지 파일의 크기를 변경하여 출력 가능 -->
+	<!-- ㄴ img 태그의 폭을 변경하면 높이는 자동 변경 -->
+	<!-- 현재 요청 웹문서와 같은 서버에 있는 웹자원(WebContext)은 URL 주소에서 접속 서버 관련 정보를 
+	생략하여 표현 가능 - 프로토콜, 서버명, 포트번호 생략 가능 -->
+	<!-- 절대경로 표현방법(권장) : 웹서버의 최상위 디렉토리(Root Directory)을 기준으로 웹자원의 경로 표현 -->
+	<img alt="images2" src="/web/html/images/a.png" width="200">
+
+	<!-- 상대경로 표현방법 : 요청 웹문서가 저장된 서버 디렉토리를 기준으로 웹자원의 경로 표현 -->
+	<img alt="images2" src="./images/a.png" width="200">
+	<img alt="images2" src="images/a.png" width="200">
+	<hr>
+	<img alt="star" src="/web/html/star.png" width="250">
+	<img alt="star" src="star.png" width="250">
+	<hr>
+	<img alt="flower" src="/web/flower.png" width="250">
+	<img alt="flower" src="../flower.png" width="250">
+	
+</body>
+</html>

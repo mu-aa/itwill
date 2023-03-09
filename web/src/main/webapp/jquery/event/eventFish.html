@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery</title>
+<style type="text/css">
+#panel {
+	width: 600px;
+	height: 300px;
+	border: 1px solid #999;
+	position: relative;
+	left: 100px;
+	right: 100px;
+	background: url("bg.png") no-repeat;
+}
+
+#bar {
+	width: 500px;
+	height: 20px;
+	position: absolute;
+	left: 50px;
+	top: 190px;
+	background: #f00;
+}
+
+#fish {
+	position: absolute;
+	left: 50px;
+	top: 120px;
+}
+
+#navi {
+	text-align: center;
+	width: 600px;
+	position: relative;
+	left: 100px;
+	top:250px;
+}
+
+#btn {
+	font-size: 1em;
+	font-weight: bold;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+	<h1>움직이는 물고기</h1>
+	<hr>
+	<div id="panel">
+		<div id="bar"></div>
+		<div id="fish">
+			<img src="fish1.png" id="fishImg">
+		</div>
+		<div id="navi">
+			<button type="button" id="btn">
+				버튼을 누르면 물고기가 움직입니다.
+			</button>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+	$("#btn").focus();
+	
+	//물고기 이미지가 출력된 태그의 [left] 스타일 속성값을 반환받아 변수에 저장
+	//ㄴ 물고기 이미지의 출력 좌표값을 저장하기 위한 변수
+	//ㄴ parseInt 함수는 좌표값에서 크기단위(px)를 제거하고 숫자값만 저장받기 위해 사용 
+	var x=parseInt($("#fish").css("left"));
+	
+	var move=50; //물고기 이미지의 출력 좌표값(left)에 대한 증감값을 저장하기 위한 변수
+	
+	$("#btn").click(function() {
+		//물고기 이미지의 출력 좌표값 변경
+		x+=move;
+		
+		//물고기 이미지의 출력 위치 변경 - 이동
+		$("#fish").css("left", x);
+		
+		if(x>=450) {
+			move=-50;
+			$("#fishImg").attr("src", "fish2.png");
+		} else if(x<=50) {
+			move=50;
+			$("#fishImg").attr("src", "fish1.png");
+		}
+	})
+	</script>
+	</body>
+</html>
