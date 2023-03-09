@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+		
+	<!-- 구글의 SMTP 서비스를 제공받기 위해서는 계정의 2단계 보안 인증 후 앱 비밀번호를 발급 -->
+	<!-- ㄴ 구글 계정 관리에서 보안 메뉴에 앱 비밀번호를 생성하여 -->
+	
+	<!-- JavaMailSender 인터페이스를 상속받은 JavaMailSenderImpl 클래스를 Spring Bean으로 등록 -->
+	<!-- SMTP 서비스를 제공하는 메일 서버의 정보를 JavaMailSenderImpl 객체 필드에 저장되도록 값 주입 -->
+	<bean class="org.springframework.mail.javamail.JavaMailSenderImpl" id="javaMailSender">
+		<!-- host 필드 : SMTP 서비스를 제공하는 메일 서버의 이름을 전달하여 저장 -->
+		<property name="host" value="smtp.gmail.com" />
+		<!-- port 필드 : SMTP 서비스를 제공하는 메일 서버의 PORT 번호를 전달하여 저장 -->
+		<property name="port" value="587" />
+		<!-- username 필드 : SMTP 서비스를 제공하는 메일 서버의 접속 사용자 이름(아이디)을 전달하여 저장 -->
+		<property name="username" value="offlmuaa@gmail.com" />
+		<!-- password 필드 : SMTP 서비스를 제공하는 메일 서버의 접속 사용자 비밀번호를 전달하여 저장 -->
+		<!-- ㄴ 사용자 비밀번호 대신 앱 비밀번호를 필드에 저장 -->
+		<property name="password" value="mqulqurkgfbgeunn" />
+		<!-- javaMailProperties 필드 : SMTP 서비스를 제공하는 메일 서버의 메일 전송 관련 부가적인 정보를
+		Properties 객체에 전달하여 저장 -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.auth">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 핵심관심모듈로 작성된 클래스를 Spring Bean으로 등록 -->
+	<!-- ㄴ javaMailSender 필드에 JavaMailSender 객체가 저장되도록 의존성 주입 -->
+	<bean class="xyz.itwill07.aop.EmailSendBean" id="emailSendBean">
+		<property name="javaMailSender" ref="javaMailSender" />
+	</bean>
+	
+	<!-- 횡단관심모듈로 작성된 클래스를 Spring Bean으로 등록 -->
+	<bean class="xyz.itwill07.aop.EmailSendAdvice" id="emailSendAdvice" />
+	
+	<aop:config>
+		<aop:aspect ref="emailSendAdvice">
+			<aop:before method="accessLog" pointcut="execution(* sendEmail(..))"/>
+			<aop:after-returning method="successLog" pointcut="execution(* sendEmail(..))" returning="email"/>
+			<aop:after-throwing method="errorLog" pointcut="execution(* sendEmail(..))" throwing="exception"/>
+		</aop:aspect>
+	</aop:config>
+</beans>

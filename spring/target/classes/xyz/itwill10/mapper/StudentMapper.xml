@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- Interface Mapper 파일과 바인딩 하기 위한 namespace 속성값으로 Interface Mapper 파일의 경로 설정 -->
+<mapper namespace="xyz.itwill10.mapper.StudentMapper">
+	<!-- Interface Mapper 파일과 바인딩할 경우 parameterType 속성 생략 가능 -->
+	<insert id="insertStudent">
+		insert into student values(#{no},#{name},#{phone},#{address},#{birthday})
+	</insert>
+	
+	<!-- 검색행의 컬럼명과 DTO 클래스의 필드명이 같은 경우 resultType 속성을 사용하여 자동 매핑 처리 -->
+	<select id="selectStudentList" resultType="Student">
+		select * from student order by no	
+	</select>
+</mapper>

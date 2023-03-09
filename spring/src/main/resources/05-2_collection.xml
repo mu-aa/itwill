@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<!-- Controller 인터페이스를 상속받은 자식 클래스를 Spring Bean으로 등록 -->
+	<bean class="xyz.itwill05.di.LoginController" id="loginController" />
+	<bean class="xyz.itwill05.di.LogoutController" id="logoutController" />
+	<bean class="xyz.itwill05.di.ListController" id="listController" />
+	
+	
+	<bean class="xyz.itwill05.di.CollectionBean" id="collectionBean">
+		<property name="nameSet">
+			<!-- set : Set 객체를 생성하여 필드에 저장하기 위한 Element -->
+			<!-- ㄴ 같은 값 중복X, 순서X -->
+			<set>
+				<!-- value : 요소값을 추가하는 Element -->
+				<value>홍길동</value>
+				<value>임꺽정</value>
+				<value>전우치</value>
+				<value>홍길동</value>
+			</set>
+		</property>
+		
+		<property name="nameList">
+			<!-- list : List 객체를 생성하여 필드에 저장하기 위한 Element -->
+			<!-- ㄴ 같은 값 중복O, 순서O -->
+			<list>
+				<value>홍길동</value>
+				<value>임꺽정</value>
+				<value>전우치</value>
+				<value>홍길동</value>
+			</list>
+		</property>
+		
+		<property name="controllerSet">
+			<set>
+				<!-- Collection 객체의 요소로 Spring Bean으로 등록된 클래스의 객체를 추가하기 위한 Element -->
+				<!-- bean 속성 : 요소로 추가될 Spring Bean의 식별자를 속성값으로 설정 - 자동 완성 기능 사용 -->
+				<ref bean="loginController"/>
+				<ref bean="logoutController"/>
+				<ref bean="listController"/>
+			</set>
+		</property>
+		
+		<property name="controllerList">
+			<list>
+				<ref bean="loginController"/>
+				<ref bean="logoutController"/>
+				<ref bean="listController"/>
+			</list>
+		</property>
+		
+		<property name="controllerMap">
+			<!-- map : Map 객체를 생성하여 필드에 저장하기 위한 Element -->
+			<map>
+				<!-- entry : Map 객체에 Entry(Key & Value)를 추가하기 위한 Element -->
+				<entry>
+					<!-- key : Entry의 MapKey(String)를 설정하기 위한 Element -->
+					<key>
+						<!-- value : 문자열을 표현하기 위한 Element - *Entry의 Value 아님* -->
+						<value>login</value>
+					</key>
+					<!-- ref : Entry의 맵값(Entry의 Value - Controller 객체)을 설정하기 위한 Element -->
+					<ref bean="loginController"/>
+				</entry>
+				<entry>
+					<key>
+						<value>logout</value>
+					</key>
+					<ref bean="logoutController"/>
+				</entry>
+				<entry>
+					<key>
+						<value>list</value>
+					</key>
+					<ref bean="listController"/>
+				</entry>
+			</map>
+		</property>
+		
+		<property name="controllerProperties">
+			<!-- props : Properties 객체를 생성하여 필드에 저장하기 위한 Element -->
+			<!-- ㄴ 필드의 자료형이 Map<String, String>인 경우에만 props Element로 객체 필드에
+			Map 객체를 생성하여 저장 가능 -->
+			<props>
+				<!-- prop : Properties 객체에 Entry를 추가하는 메소드 -->
+				<!-- Element의 내용으로, Entry로 저장된 값(문자열) 설정 -->
+				<!-- key 속성 : Entry를 구분하기 위한 식별자(문자열)를 속성값으로 설정 -->
+				<prop key="login">xyz.itwill05.di.LoginController</prop>
+				<prop key="logout">xyz.itwill05.di.LogoutController</prop>
+				<prop key="list">xyz.itwill05.di.ListController</prop>
+			</props>
+		</property>
+	</bean>
+</beans>

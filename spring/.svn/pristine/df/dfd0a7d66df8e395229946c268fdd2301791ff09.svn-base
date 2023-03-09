@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- init-method 속성 : Spring Container에 의해 Spring Bean 생성 후 한번만 자동 호출되어
+	객체의 초기화 작업을 실행하기 위한 메소드의 이름을 속성값으로 설정 -->
+	<!-- ㄴ init-method 속성값은 이클립스의 자동 완성 기능을 사용하여 작성 가능 -->
+	<!-- destroy-method 속성 : Spring Container에 의해 Spring Bean 소멸 전 한번만 자동 호출되어
+	객체의 마무리 작업을 실행하기 위한 메소드의 이름을 속성값으로 설정 -->
+	<!-- ㄴ destroy-method 속성값은 이클립스의 자동 완성 기능을 사용하여 작성 가능 -->
+	<bean class="xyz.itwill04.bean.InitDestroyMethodBean" id="initDestroyMethodBean"
+		init-method="init" destroy-method="destroy" />
+		
+	<!-- lazy-init 속성 : false 또는 true 중 하나를 속성값으로 설정 -->
+	<!-- ㄴ false(default) : Spring Container를 초기화 할 때 객체(Spring Bean)를 미리 생성 -->
+	<!-- ㄴ true : Spring Container로부터 Spring Bean을 제공받기 위해 getBean() 메소드를 호출할 때
+	객체(Spring Bean) 생성 -->
+	<bean class="xyz.itwill04.bean.LazyInitBean" id="lazyInitBean" lazy-init="true" />
+	
+	<!-- Spring Container는 Spring Bean Configuration File에 등록된 모든 클래스를 리플렉션
+	기술을 사용하여 미리 객체(Spring Bean)로 생성 -->
+	<!-- ㄴ 리플렉션 기술을 사용하면 클래스의 접근지정자에 상관없이 모든 요소에 접근 가능 -->
+	<!-- ㄴ 생성자가 은닉화 선언되어있어도 Spring Container는 클래스의 생성자로 객체 생성 가능 -->
+	<!-- Spring Bean Configuration File에 등록된 Singleton Class는 클래스가 메모리에 로딩된 후
+	정적영역의 명령을 실행하여 객체를 생성하고, Spring Container에 의해 객체를 다시 생성 -->
+	<!-- ㄴ Singleton Class에 의해 객체가 2개 생성 - Singleton Class 작성 규칙 위반 -->
+	<!-- factory-method 속성 : Singleton Class에서 객체를 반환하는 메소드의 이름을 속성값으로 설정 -->
+	<!-- ㄴ Spring Container에 의해 객체를 생성하지 않고 정적영역의 명령으로 객체를 생성하여 사용 -->
+	<bean class="xyz.itwill04.bean.FactoryMethodBean" factory-method="getFactoryMethodBean" />
+	
+	<!-- Spring Container를 bean Element의 선언 순서대로 등록된 클래스를 객체로 생성 -->
+	<!-- depends-on 속성 : Spring Bean을 구분하기 위한 식별자(beanName)를 속성값으로 설정 -->
+	<!-- ㄴ bean Element에 등록된 클래스를 객체로 생성하기 전에 depends-on 속성값으로 설정된
+	Spring Bean의 클래스를 미리 생성 -->
+	<bean class="xyz.itwill04.bean.DependsOnOneBean" depends-on="dependsOnTwoBean"/>
+	<bean class="xyz.itwill04.bean.DependsOnTwoBean" id="dependsOnTwoBean" />
+	
+	<!-- scope 속성 : singleton(default), prototype, request, session 중 하나를 속성값으로 설정 -->
+	<!-- singleton 또는 prototype : 객체(Spring Bean)의 생성 갯수를 설정하는 속성값 -->
+	<!-- ㄴ singleton : Spring Container가 bean Element로 설정된 클래스로 객체를 *하나만* 생성하여 제공 -->
+	<!-- ㄴ prototype : Spring Container가 bean Element로 설정된 클래스로 객체를 *여러개* 생성하여 제공 -->
+	<!-- ㄴ scope 속성값을 [prototype]으로 설정할 경우 lazy-init 속성값을 반드시 [true]로 설정 -->
+	<!-- request 또는 session : 객체의 사용범위를 설정하는 속성값 - 웹프로그램 작성시에만 사용 -->
+	<bean class="xyz.itwill04.bean.ScopeBean" id="singletonBean" lazy-init="true" scope="singleton" />
+	<bean class="xyz.itwill04.bean.ScopeBean" id="prototypeBean" lazy-init="true" scope="prototype" />
+</beans>

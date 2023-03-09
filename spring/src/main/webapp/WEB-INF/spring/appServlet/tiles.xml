@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "//Apache Software Foundation//DTD Tiles Configuration 3.0/EN"
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<!-- definition : 요청 처리 메소드의 반환값(ViewName)을 제공받아 응답 처리할 템플릿 페이지의
+	JSP 문서를 설정하기 위한 Element -->
+	<!-- name 속성 : definition Element를 구분하기 위한 식별자를 속성값으로 설정 -->
+	<!-- ㄴ 요청 처리 메소드의 반환값을 제공받아 응답 처리하기 위한 definition Element 지정 -->
+	<!-- template 속성 : 템플릿 페이지의 JSP 문서 경로를 속성값으로 설정 -->
+	<definition name="main" template="/WEB-INF/views/template.jsp">
+		<!-- put-attribute : definition Element의 템플릿 페이지를 구성하기 위한 JSP 문서를 제공하는 Element -->
+		<!-- name 속성 : put-attribute Element를 구분하기 위한 식별자를 속성값으로 설정 -->
+		<!-- ㄴ 템플릿 페이지의 JSP 문서에서 put-attribute Element로 제공된 JSP 문서의 실행 결괴를
+		제공받기 위해 사용하는 이름 -->
+		<!-- value 속성 : put-attribute Element로 제공될 JSP 문서의 경로를 속성값으로 설정 -->
+		<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/layout/main.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="admin" template="/WEB-INF/views/layout/admin_template.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/layout/admin_header.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/layout/admin_main.jsp" />
+	</definition>
+	
+	<definition name="admin/*" extends="admin">
+		<put-attribute name="content" value="/WEB-INF/views/tiles/{1}.jsp" />
+	</definition>
+	
+	<!-- name 속성값을 [*]로 설정한 경우 요청 처리 메소드에서 [문자값] 형식으로 반환되는 모든 ViewName을 제공받아 처리 -->
+	<!-- extends 속성 : definition Element의 식별자(name 속성)를 속성값으로 설정 -->
+	<!-- ㄴ definition Elemen의 템플릿 페이지와 하위 Element의 정보를 상속받아 사용 가능 -->
+	<definition name="*" extends="main">
+		<!-- put-attribute Element에서 put-attribute Element와 같은 식별자를 사용하여 선언하면
+		기존 JSP 문서 대신 변경된 JSP 문서 제공받아 사용 가능 - Overried -->
+		<!-- definition Element의 name 속성값을 [*]로 설정하면 put-attribute Element의 value 속성에서는
+		반환되는 [문자값]을 {정수값} 형식으로 표현하여 사용 -->
+		<!-- ㄴ 반환되는 [문자값]을 대신하는 정수값은 {1}부터 시작 -->
+		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+	 
+	 <!-- name 속성값을 [*/*]의 경로로 설정한 경우 요청 처리 메소드에서 [문자값/문자값] 형식으로 반환되는
+	 모든 View 이름을 제공받아 definition Element로 처리 가능 -->
+	 <definition name="*/*" extends="main">
+	 	<!-- name 속성값의 [*] 기호가 여러개인 경우 {정수값}이 1부터 1씩 증가되어 문자값을 차례대로 표현 -->
+	 	<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+	 </definition>
+	 
+	 <definition name="*/*/*" extends="main">
+	 	<put-attribute name="content" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+	 </definition>
+</tiles-definitions>

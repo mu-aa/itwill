@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	<!-- servlet-context.xml : appServlet 이름의 Front Controller에서 사용될 클래스의 Spring Bean을
+	등록하기 위한 Bean Configuration File -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<!-- annotation-driven : @Controller Annotation을 사용하여 요청 처리 클래스를 Spring Bean으로 등록하고
+	@RequestMapping Annotation을 사용하여 작성된 메소드를 요청 처리 메소드로 등록하여 클라이언트 요청에 의해
+	요청 처리 클래스의 메소드가 호출되어 처리되도록 설정하는 Element -->
+	<!-- ㄴ HandlerMapping 객체를 사용하지 않아도 요청 처리 클래스의 요청 처리 메소드가 클라이언트 요청에 의해
+	호출되도록 자동으로 매핑 처리 -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- resources : 클라이언트 요청을 Front Controller가 직접 응답 처리되도록 설정하는 Element -->
+	<!-- ㄴ 클라이언트의 resource 파일 요청에 대한 응답 처리를 위해 사용하는 Element -->
+	<!-- mapping 속성 : 클라이언트에 의해 요청되는 resource 파일의 요청 URL 주소 패턴을 속성값으로 설정 -->
+	<!-- ㄴ [**] 패턴문자를 속성값으로 사용한 경우 현재 폴더 및 하위 폴더의 resource 파일 요청 가능 -->
+	<!-- location 속성 : 클라이언트 요청에 의해 resource 파일을 검색하기 위한 폴더를 속성값으로 설정 -->
+	<!-- <resources mapping="/resources/**" location="/resources/" /> -->
+	<resources mapping="/images/**" location="/resources/images/" />
+	<resources mapping="/css/**" location="/resources/css/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!-- InternalResourceViewResolver 클래스를 Spring Bean으로 등록 -->
+	<!-- ㄴ InternalResourceViewResolver 객체 : 클라이언트 요청에 의해 호출되는 요청 처리 메소드의 반환값(ViewName)
+	을 제공받아 응답 가능한 JSP 문서로 변환하여 반환하는 객체 -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="3" />
+	</beans:bean>
+	
+	<!-- UrlBasedViewResolver 클래스를 Spring Bean으로 등록 -->
+	<!-- UrlBasedViewResolver 객체 : 클라이언트 요청에 의해 호출되는 요청 처리 메소드의 반환값(ViewName)을 제공받아
+	Spring Framework가 제공하는 ViewResolver 객체가 아닌 외부의 View 프로그램을 이용하여 응답 처리하는 객체 -->
+	<!-- ㄴ ViewName으로 응답하기 위한 View를 커스터마이징 하는 객체 -->
+	<beans:bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<!-- viewClass 필드에 View 프로그램을 구현한 클래스를 Injection 처리 -->
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<!-- order 필드에 ViewResolver 우선순위 관련 정수값을 Injection 처리 -->
+		<!-- ㄴ ★다수의 ViewResolver 객체를 이용할 경우 모든 ViewResolver 객체는 반드시 우선순위 설정 -->
+		<!-- ㄴ 필드에 저장된 정수값이 적을수록 우선순위가 높게 설정 -->
+		<beans:property name="order" value="2" />
+	</beans:bean>
+	
+	<!-- TilesConfigurer 클래스를 Spring Bean으로 등록 -->
+	<!-- TilesConfigurer 객체 : TilesView 프로그램의 응답관련 정보를 저장한 Tiles 환경설정 파일을 제공하는 객체 -->
+	<beans:bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<!-- definitions 필드에 List 객체를 생성하여 Injection 처리 -->
+		<!-- ㄴ List 객체의 요소로 Tiles 환경설정 파일(XML)의 경로를 추가하여 제공 -->
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/spring/appServlet/tiles.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	
+	<!-- component-scan : Spring Container가 Spring Annotation을 검색하여 처리하기 위한 Element -->
+	<!-- base-package 속성 : Spring Annotation을 검색하기 위해 Annotation을 사용한 클래스의 패키지를 속성값으로 설정 -->
+	<!-- <context:component-scan base-package="xyz.itwill.controller" /> -->
+	<!-- ㄴ 메인 페이지를 HomeController에서 템플릿 페이지로 변경하기 위해 주석 처리 -->
+	<!-- xyz.itwill10.controller 패키지에 요청 처리 클래스(Model)를 작성하고 Annotation을 이용해 Spring Bean 등록 -->
+	<context:component-scan base-package="xyz.itwill10.controller" />
+	<!-- xyz.itwill10.dao 패키지에 DAO 클래스를 작성하고 Annotation을 이용해 Spring Bean 등록 -->
+	<context:component-scan base-package="xyz.itwill10.dao" />
+	<context:component-scan base-package="xyz.itwill10.service" />
+	
+	<!-- TransactionManager를 사용하여 트랜잭션 처리를 위해 tx Namespaces로 spring-tx.xsd 파일의 Element를
+	사용할 수 있도록 설정 -->
+	<!-- advice : TransactionManager 관련 Spring Bean을 Advisor로 설정하기 위한 Element -->
+	<!-- Advisor : 삽입 위치(JoinPoint)가 정해져 있는 횡단관심코드의 메소드가 작성된 Advice 클래스로
+	생성된 객체(Spring Bean) -->
+	<!-- id 속성 : advice Element를 구분하기 위한 식별자를 속성값으로 설정 -->
+	<!-- transaction-manager 속성 : TransactionManager 관련 클래스의 Spring Bean의 식별자(beanName)
+	를 속성값으로 설정 -->
+	<!-- ㄴ ROLLBACK 처리와 COMMIT 처리에 대한 설정이 저장된 TransactionManager 객체 제공 -->
+	<!-- attributes : TransactionManager 객체에 의해 처리될 메소드 목록을 설정하는 Element -->
+	<!-- method : TransactionManager 객체에 의해 트랜잭션 처리될 메소드와 방식을 설정하기 위한 Element -->
+	<!-- name 속성 : TransactionManager 객체에 의해 트랜잭션 처리될 메소드의 이름을 속성값으로 설정 -->
+	<!-- ㄴ 메소드 이름에 [*] 패턴문자를 사용하여 설정 가능 -->
+	<!-- rollback-for 속성 : ROLLBACK 명령이 실행될 예외를 속성값으로 설정 -->
+	<!-- read-only 속성 : false(default) 또는 true 중 하나를 속성값으로 설정 -->
+	<!-- 
+	<tx:advice id="txAdvisor" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" rollback-for="Exception" />
+			<tx:method name="modify*" rollback-for="Exception" />
+			<tx:method name="remove*" rollback-for="Exception" />
+			<tx:method name="get*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	-->
+	
+	<!-- SpringAOP 기능을 사용하여 타겟 메소드 호출 시 TransactionManager 객체가 동작되도록 설정 -->
+	<!-- ㄴ SpringAOP 기능을 사용하기 위해 aop Namespaces로 spring-aop.xsd 파일의 Element 설정 -->
+	<!-- advisor : 삽입 위치(JoinPoint)가 지정된 Advice 클래스의 객체를 제공받기 위한 Element -->
+	<!-- advice-ref : advice Element의 식별자를 속성값으로 설정 -->
+	<!-- 
+	<aop:config>
+		<aop:advisor advice-ref="txAdvisor" pointcut="execution(* xyz.itwill10.service..*(..))" />
+	</aop:config>
+	-->
+	
+	<!-- Interceptor 관련 클래스를 Spring Bean으로 등록 -->
+	<beans:bean class="xyz.itwill10.util.AdminAuthInterceptor" id="adminAuthInterceptor" />
+	<beans:bean class="xyz.itwill10.util.LoginAuthInterceptor" id="loginAuthInterceptor" />
+	
+	<!-- interceptors : interceptor Element를 등록하기 위한 Element  -->
+	<interceptors>
+		<!-- interceptor : 인터셉터 기능을 제공하기 위한 규칙을 설정하기 위한 Element -->
+		<interceptor>
+			<!-- mapping : 인터셉터가 동작될 요청 페이지의 URL 주소를 설정하는 Element -->
+			<!-- path 속성 : 요청 URL 주소를 속성값으로 설정 -->
+			<mapping path="/userinfo/write"/>
+			<mapping path="/userinfo/modify"/>
+			<mapping path="/userinfo/remove"/>
+			<!-- ref : 인터셉터 기능을 제공할 객체(Spring Bean)를 설정하는 Element -->
+			<!-- bean 속성 : Spring Bean의 식별자(beanName)를 속성값으로 설정 -->
+			<beans:ref bean="adminAuthInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<!-- 인터셉터 기능을 제공할 요청 URL 주소에는 [*] 패턴문자 사용 가능 -->
+			<!-- ㄴ * : 현재 폴더의 요청 페이지, ** : 현재 폴더 및 하위 폴더 포함 -->
+			<!-- <mapping path="/*"/> -->
+			<!-- <mapping path="/**"/> -->
+			<mapping path="/userinfo/*"/>
+			<!-- exclude-mapping : 인터셉터 기능을 제공하지 않기 위한 요청 URL 주소를 설정하는 Element -->
+			<exclude-mapping path="/userinfo/login"/>
+			<!-- 
+			<mapping path="/userinfo/list"/>
+			<mapping path="/userinfo/view"/>
+			 -->
+			<beans:ref bean="loginAuthInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
+	<!-- 파일 업로드 기능을 제공하는 클래스를 Spring Bean으로 등록 -->
+	<!-- ㄴ Spring Bean의 식별자(beanName)를 반드시 [multipartResolver]로 설정 -->
+	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+		<!-- maxUploadSize 필드에 최대 업로드 파일의 제한 용량(Byte)을 주입 -->
+		<beans:property name="maxUploadSize" value="20971520"/>
+		<!-- defaultEncoding 필드에 전달값에 대한 문자형태(캐릭터셋)을 주입 -->
+		<beans:property name="defaultEncoding" value="utf-8"/>
+	</beans:bean>
+</beans:beans>

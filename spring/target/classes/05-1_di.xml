@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Spring Bean으로 등록된 클래스의 기본 생성자를 이용하여 객체 생성 -->
+	<!-- ㄴ 객체의 필드에는 기본값(0, null, false) 저장 -->
+	<bean class="xyz.itwill05.di.Student" id="student1" />
+	
+	<!-- Spring Bean Injection : Spring Container에 의해 Spring Configuration File에 등록된 클래스로
+	객체(Spring Bean) 생성 시 필드에 원하는 값 또는 객체를 저장 -->
+	<!-- Constructor Injection 또는 Setter Injection을 이용하여 값 또는 객체를 필드에 저장 -->
+	
+	<!-- Spring Bean으로 등록된 클래스의 매개변수가 선언된 생성자를 이용하여 객체 생성 -->
+	<!-- ㄴ bean Element의 하위 Element를 사용하여 생성자 매개변수에 값을 전달하여 필드값으로 저장 -->
+	<!-- ㄴ Constructor Injection : 생성자를 이용하여 객체 필드 초기화 작업 실행 -->
+	<bean class="xyz.itwill05.di.Student" id="student2">
+		<!-- constructor-arg : Spring Bean으로 등록된 클래스의 생성자 매개변수에 값(객체)을 전달하는 Element -->
+		<!-- ㄴ Element의 갯수만큼 매개변수가 선언된 생성자를 반드시 작성 -->
+		<!-- value 속성 : 매개변수에 전달하기 위한 값을 속성값으로 설정 -->
+		<!-- ㄴ Spring Bean으로 등록된 클래스가 객체로 생성될 때 객체 필드에 전달값 저장 -->
+		<!-- ㄴ Value Injection : 객체의 필드에 값이 저장되도록 초기화 작업 실행 -->
+		<!-- ㄴ 전달값은 기본적으로 문자열(String 객체)로 전달 - 매개변수의 자료형에 의해 자동 형 변환 -->
+		<!-- ㄴ 매개변수의 자료형에 의해 자동 형 변환될 경우 NumberFormatException 발생 가능 -->
+		<constructor-arg value="1000" />
+	</bean>
+	
+	<!-- constructor-arg Element의 작성순서에 의해 매개변수 값(객체)이 전달되어 객체 초기화 -->
+	<!-- <bean class="xyz.itwill05.di.Student" id="student3">
+		<constructor-arg value="2000"/>
+		<constructor-arg value="홍길동"/>
+		<constructor-arg value="abc@itwill.xyz"/>
+	</bean> -->
+	<bean class="xyz.itwill05.di.Student" id="student3">
+		<!-- index 속성 : 매개변수에 값(객체)을 전달하기 위한 순서(Index)를 속성값으로 설정 -->
+		<!-- ㄴ index 속성값은 0부터 1씩 증가되는 정수값 사용 -->
+		<constructor-arg value="홍길동" index="1"/>
+		<constructor-arg value="abc@itwill.xyz" index="2"/>
+		<constructor-arg value="2000" index="0"/>
+	</bean>
+	
+	<!-- 클래스의 기본 생성자를 이용하여 객체 생성 - 객체 필드에는 기본값 저장 -->
+	<!-- ㄴ 하위 Element 사용하여 Setter 메소드를 호출해 필드값 변경 - Setter Injection -->
+	<bean class="xyz.itwill05.di.Student" id="student4">
+		<!-- property : 객체의 Setter 메소드를 호출하여 필드값을 변경하는 Element -->
+		<!-- name 속성 : 필드값을 변경하기 위한 필드명을 속성값으로 설정 - 자동 완성 사용 가능 -->
+		<!-- ㄴ name 속성값으로 설정된 필드에 대한 Setter 메소드를 호출하여 필드값 변경 -->
+		<!-- ㄴ 필드에 대한 Setter 메소드가 없거나 잘못 선언된 경우 예외 발생 -->
+		<!-- value 속성 : 필드에 저장된 값을 속성값으로 설정 - 값 주입 -->
+		<property name="num" value="3000" />
+		<property name="name" value="임꺽정" />
+		<property name="email" value="xyz@itwill.xyz" />
+	</bean>
+	 
+	<!-- Constructor Injection과 Setter Injection을 같이 사용하여 객체 초기화 작업 가능 -->
+	<bean class="xyz.itwill05.di.Student" id="student5">
+		<constructor-arg value="4000" />
+		<constructor-arg value="전우치" />
+		<property name="email" value="opq@itwill.xyz" />
+	</bean>
+	
+	<!-- PropertyPlaceholderConfigurer 클래스 : Properties 파일을 제공받아 Properties 파일에 설정된 값을
+	Spring Bean Configuration File에서 사용할 수 있도록 제공하는 클래스 -->
+	<!-- ㄴ locations 필드에 Properties 파일의 경로를 전달하여 저장 -->
+	<!-- ㄴ Properties 파일에 의해 제공되는 값은 Spring Bean Configuration File에서 ${이름}으로 사용 가능 -->
+	<!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="xyz/itwill05/di/student.properties" />
+	</bean> -->
+	<!-- Spring 5.2 이상에서는 PropertySourcesPlaceholderConfigurer 클래스를 사용하여 Properties 파일을
+	제공받아 Spring Bean Configuration File에서 사용할 수 있도록 변경 -->
+	<bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+		<property name="locations" value="xyz/itwill05/di/student.properties" />
+	</bean>
+	 
+	<!-- Properties 파일에 의해 제공되는 값을 사용하여 객체 필드 초기화 작업 -->
+	<bean class="xyz.itwill05.di.Student" id="student6">
+		<!-- ${num} 으로 Properties 파일의 num값 사용 -->
+		<property name="num" value="${num}" />
+		<property name="name" value="${name}" />
+		<property name="email" value="${email}" />
+	</bean>
+	
+	<!-- StudentDAO 인터페이스를 상속받은 자식 클래스를 Spring Bean으로 등록 -->
+	<!-- <bean class="xyz.itwill05.di.StudentJdbcDAO" id="studentJdbcDAO" /> -->
+	<bean class="xyz.itwill05.di.StudentMybatisDAO" id="studentMybatisDAO" />
+	
+	<!-- StudentService 인터페이스를 상속받은 자식 클래스를 Spring Bean으로 등록 -->
+	<!-- ㄴ 클래스의 기본 생성자를 이용하여 객체 생성 - 객체 필드에는 기본값 저장 -->
+	<!-- 문제점) StudentServiceImpl 클래스로 생성된 객체의 필드에는 [null]이 저장되어 StudentServiceImpl
+	클래스의 메소드에서 StudentDAO 클래스의 메소드를 호출하면 NullPointerException 발생 - 의존관계 미성립 -->
+	<!-- <bean class="xyz.itwill05.di.StudentServiceImpl" id="studentServiceImpl" /> -->
+	
+	<!-- ★해결법-1) StudentServiceImpl 클래스의 "매개변수가 선언된 생성자"를 이용하여 객체 생성 -->
+	<!-- ㄴ 생성자 매개변수에 StudentDAO 인터페이스를 상속받은 자식 클래스의 객체를 전달하여
+	필드에 저장 - ●Constructor Injection -->
+	<!-- constructor-arg Element를 사용하여 StudentServiceImpl 클래스의 객체 필드에
+	StudentDAO 인터페이스를 상속받은 자식 클래스의 객체 저장 - 의존관계 성립 -->
+	<!-- ref 속성 : Spring Container로 관리되는 Spring Bean의 식별자를 속성값으로 설정 -->
+	<!-- ㄴ Spring Container로 관리되는 Spring Bean을 객체 필드에 저장 - 의존성 주입(Dependency Injection - DI) -->
+	<!-- <bean class="xyz.itwill05.di.StudentServiceImpl" id="studentServiceImpl">
+		<constructor-arg ref="studentJdbcDAO"></constructor-arg>
+	</bean> -->
+	
+	<!-- ★해결법-2) 클래스의 기본 생성자를 이용하여 객체를 생성하고 Setter 메소드를 호출하여 객체 생성 -->
+	<!-- ㄴ Setter 메소드를 호출하여 객체 필드에 StudentDAO 인터페이스를 상속받은 자식 클래스의
+	객체 저장 - ●Setter Injection -->
+	<!-- property Element를 사용하여 StudentServiceImpl 클래스의 객체 필드에 StudentDAO 인터페이스를
+	상속받은 자식 클래스의 객체 저장 - 의존관계 성립 -->
+	<!-- 
+	<bean class="xyz.itwill05.di.StudentServiceImpl" id="studentServiceImpl">
+		<property name="studentDAO" ref="studentJdbcDAO" />
+	</bean>
+	 -->
+	 <!-- 기존에 사용하던 studentJdbcDAO 클래스(객체) 대신 교체할 클래스(객체)로 ref 속성값 설정 -->
+	 <!-- ㄴ 기존 클래스 대신 새로운 클래스로 변경해도 관계가 설정된 클래스를 변경할 필요 없이
+	 Spring Bean Configuration File만 수정해도 의존 관계 변경 가능 - 유지보수 효율성 증가 -->
+	<bean class="xyz.itwill05.di.StudentServiceImpl" id="studentServiceImpl">
+		<property name="studentDAO" ref="studentMybatisDAO" />
+	</bean>
+</beans>

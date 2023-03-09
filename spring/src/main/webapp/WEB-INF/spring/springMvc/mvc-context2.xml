@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Spring Framework 라이브러리의 InternalResourceViewResolver 클래스를 Spring Bean으로 등록 -->
+	<!-- ㄴ InternalResourceViewResolver 객체 : viewName을 전달받아 JSP 문서로 변환하는 기능 제공 -->
+	<!-- ㄴ prefix 필드와 suffix 필드에 JSP 문서로 변환하기 위한 정보를 저장 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- prefix 필드 : 뷰이름 앞부분에 추가될 문자열 - 디렉토리 -->
+		<property name="prefix" value="/WEB-INF/mvc/" />
+		<!-- suffix 필드 : 뷰이름 뒷부분에 추가될 문자열 - 확장자 -->
+		<property name="suffix" value=".jsp" />
+	</bean>
+</beans>
