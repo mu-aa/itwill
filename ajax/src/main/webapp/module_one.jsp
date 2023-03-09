@@ -1,0 +1,74 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AJAX</title>
+<script type="text/javascript" src="js/xhr.js"></script>
+<style type="text/css">
+
+#display {width: 50%; padding: 5px; margin: 10px; font-size: 30px; border: 1px solid red;}
+
+</style>
+</head>
+<body>
+	<h1>AJAX Module</h1>
+	<hr>
+	<div id="display">요청 웹프로그램에 대한 실행 결과 출력</div>
+	<table>
+		<tr>
+			<td>아이디</td>
+			<td><input type="text" id="id"></td>
+		</tr>
+		<tr>
+			<td>이름</td>
+			<td><input type="text" id="name"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><button type="button" id="btn">요청(AJAX)</button></td>
+		</tr>
+	</table>
+	
+	<script type="text/javascript">
+	document.getElementById("btn").onclick=function() {
+		var id=document.getElementById("id").value;
+		if(id=="") {
+			document.getElementById("display").innerHTML="아이디를 입력해주세요.";
+			return;
+		}
+		
+		var name=document.getElementById("name").value;
+		if(name=="") {
+			document.getElementById("display").innerHTML="이름을 입력해주세요.";
+			return;
+		}
+		
+		document.getElementById("id").value="";
+		document.getElementById("name").value="";
+		
+		//AJAX 기능을 제공하는 모듈을 사용하여 요청과 응답 처리 - sendRequest 함수 호출
+		
+		/*
+		//GET 방식으로 웹프로그램을 요청한 경우 모든 전달값을 부호화 처리하여 전달
+		id=encodeURIComponent(id);
+		name=encodeURIComponent(name);
+		sendRequest("get", "module_two.jsp", "id="+id+"&name="+name, viewMessage);
+		*/
+		
+		sendRequest("post", "module_two.jsp", "id="+id+"&name="+name, viewMessage);
+		
+	}
+	
+	function viewMessage() {
+		if(xhr.readyState==4) {
+			if(xhr.status==200) {
+				document.getElementById("display").innerHTML=xhr.responseText;
+			} else {
+				alert("에러 코드 = "+xhr.status);
+			}
+		}
+	}
+	</script>
+</body>
+</html>
