@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mapper File : SQL 명령을 등록하기 위한 파일 -->
+<!-- ㄴ mybatis 환경설정 파일(mybatis-config.xml)에서 mapper Element를 사용해 Mapper File로 등록해야 사용 가능 -->
+<!--  -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper : SQL 명령을 등록하기 위한 상위 Element -->
+<!-- namespace 속성 : mapper를 구분하기 위한 식별자를 속성값으로 설정 -->
+<!-- ㄴ SqlSession 객체가 원하는 mapper의 SQL 명령을 제공받아 사용하기 위해 설정 -->
+<!-- ㄴ mybatis framework에서는 namespace 속성값을 Java 자료형 형식([.]으로 구분)으로 작성하는 것을 권장 -->
+<!-- ㄴ ibatis framework에서는 namespace 속성 생략 가능 -->
+<mapper namespace="xyz.itwill.mapper.StudentMapper">
+	<!-- select : SELECT 명령을 등록하기 위한 Element -->
+	<!-- id 속성 : mapper에 등록된 SQL 명령을 구분하기 위한 식별자를 속성값으로 설정 -->
+	<!-- resultType 속성 : SQL 명령의 실행 결과를 mapping하여 제공하기 위한 Java 자료형을 속성값으로 설정 -->
+	<!-- ㄴ SELECT 명령으로 실행된 하나의 검색행에 대한 Java 자료형을 설정하여 객체로 매핑되도록 처리 -->
+	<!-- resultType 속성값으로 Java 자료형 대신 mybatis-config.xml 파일(환경설정)의 typeAlias Element로
+	설정된 별칭 사용 가능 -->
+	<!-- <select id="selectStudentList" resultType="xyz.itwill.dto.Student"> -->
+	<select id="selectStudentList" resultType="Student">
+		select * from student order by no
+	</select>
+</mapper>

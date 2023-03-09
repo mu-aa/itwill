@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- XML 기반의 mapper 파일과 Interface 기반의 mapper 파일을 바인딩하여 하나의 mapper로 동작되도록 설정 -->
+<!-- ㄴ XML 기반의 mapper 파일에서 mapper Element의 namespace 속성값과 같은 이름으로 Interface  -->
+<!-- ㄴ XML 기반의 mapper 파일에서 SQL 명령을 등록한 Element와 동일한 형식으로 Interface 기반의 
+mapper 파일에 추상메소드 작성 -->
+<mapper namespace="xyz.itwill.mapper.MyMemberMapper">
+	<!-- DAO 클래스의 메소드에서 Interface 기반의 mapper 파일에 추상메소드를 호출할 경우 동일한 형식의
+	XML 기반의 mapper 파일에다가 Element에 등록된 SQL 명령을 전달하여 실행 -->
+	<!-- ㄴ Element의 id 속성값과 동일한 이름의 추상메소드 선언 -->
+	<!-- ㄴ Element의 parameterType 속성값과 동일한 자료형으로 추상메소드의 매개변수를 선언 -->
+	<!-- ㄴ Element의 resultType 속성값과 동일한 자료형으로 추상메소드의 반환형을 선언 -->
+	<insert id="insertMember" parameterType="MyMember">
+		insert into mymember values(#{id}, #{name}, #{phone}, #{email})
+	</insert>
+	
+	<update id="updateMember" parameterType="MyMember">
+		update mymember set name=#{name}, phone=#{phone}, email=#{email} where id=#{id}
+	</update>
+
+	<delete id="deleteMember" parameterType="string">
+		delete from mymember where id=#{id}
+	</delete>
+	
+	<select id="selectMember" parameterType="string" resultType="MyMember">
+		select * from mymember where id=#{id}
+	</select>
+	
+	<select id="selectMemberList" resultType="MyMember">
+		select * from mymember order by id
+	</select>
+</mapper>

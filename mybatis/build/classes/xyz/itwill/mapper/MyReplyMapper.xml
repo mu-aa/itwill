@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.itwill.mapper.MyReplyMapper">
+	<insert id="insertReply" parameterType="MyReply">
+		<selectKey resultType="int" keyProperty="replyNo" order="BEFORE">
+			select myreply_seq.nextval from dual
+		</selectKey>
+		insert into myreply values(#{replyNo}, #{replyId}, #{replyContent}, sysdate, #{replyCommentNo})
+	</insert>
+	
+	<select id="selectReplyList" resultType="MyReply">
+		select * from myreply order by reply_no desc
+	</select>
+	
+	<!-- MYREPLY 테이블에 저장된 모든 댓글 중 가장 최근에 작성된 5개의 댓글만 검색 -->
+	<!-- 문제점) XML 기반의 Mapper 파일에서는 SQL 명령이 등록된 Element에서 관계연산자(< 또는 >)를 사용할 경우
+	Element로 인식되어 에러 발생 -->
+	<select id="selectCountReplyList" resultType="MyReply">
+		<!-- select rownum, reply.* from (select * from myreply order by reply_no desc) reply where rownum <= 5  --> 
+		
+		<!-- 해결법-1) 관계연산자(< 또는 >)를 entity reference(회피문자, escape character)로 변경하여 SQL 명령 작성 -->
+		<!-- select rownum, reply.* from (select * from myreply order by reply_no desc) reply where rownum &le; 5 --> 
+		
+		<!-- 해결법-2) CDATA 세션을 사용하여 SQL 명령 작성 -->
+		<![CDATA[
+			select rownum, reply.* from (select * from myreply order by reply_no desc) reply where rownum <= 5
+		]]>
+	</select>
+	
+	
+	<!-- 객체 필드 DTO로 join -->
+	<resultMap type="MyReplyUser" id="myRepleUserResultMap1">
+		<association property="reply" javaType="MyReply">
+			<id column="reply_no" property="replyNo"/>
+			<result column="reply_id" property="replyId"/>
+			<result column="reply_content" property="replyContent"/>
+			<result column="reply_date" property="replyDate"/>
+			<result column="reply_comment_no" property="replyCommentNo"/>
+		</association>
+		<association property="user" javaType="MyUser">
+			<id column="user_id" property="userId"/>
+			<result column="user_name" property="userName"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectReplyUserList1" resultMap="myRepleUserResultMap1">
+		select reply_no, reply_id, reply_content, reply_date, reply_comment_no, user_id, user_name
+		from myreply join myuser on reply_id=user_id order by reply_no desc
+	</select>
+	
+	
+	<!-- join 없이 테이블 연결 -->
+	<resultMap type="MyReply" id="myReplyResultMap">
+		<id column="reply_no" property="replyNo"/>
+		<result column="reply_id" property="replyId"/>
+		<result column="reply_content" property="replyContent"/>
+		<result column="reply_date" property="replyDate"/>
+		<result column="reply_comment_no" property="replyCommentNo"/>
+	</resultMap>
+	
+	<resultMap type="MyReplyUser" id="MyReplyUserResultMap2">
+		<!-- resultMap 속성 : resultMap Element의 식별자를 속성값으로 설정 -->
+		<!-- ㄴ resultMap Element로 설정된 mapping 정보를 이용하여 검색행의 컬럼값을
+		객체 필드에 저장하여 객체를 제공받아 필드에 저장 -->
+		<association property="reply" resultMap="myReplyResultMap"/>
+		<!-- select 속성 : select Element의 식별자를 속성값으로 설정 -->
+		<!-- ㄴ select Element의 SELECT 명령으로 실행된 검색결과를 객체로 제공받아 포함 객체 필드에 -->
+		<!-- column 속성 : SELECT 명령으로 검색된 행의 컬럼값을 select 속성으로 설정된 select Element의
+		paramemterType 속성값으로 전달하여 SQL 명령에서 사용 -->
+		<association property="user" select="selectMyUser" column="reply_id"/>
+	</resultMap>
+	
+	<!-- association Element에서만 사용하기 위한 SELECT 명령 -->
+	<!-- ㄴ parameterType 속성으로 전달받은 값으로 단일행이 검색되도록 SELECT 명령 작성 -->
+	<!-- ㄴ DAO 클래스의 메소드에서 사용될 SQL 명령이 아니므로 Interface Mapper 파일에 추상메소드 미선언 -->
+	<select id="selectMyUser" parameterType="string" resultType="MyUser">
+		select * from myuser where user_id=#{userId}
+	</select>
+	
+	<!-- 테이블 join을 사용하지 않고 resultMap Element의 mapping 정보를 제공받아 2개 이상의 테이블
+	컬럼값을 검색하여 Java 객체로 제공 가능 -->
+	<select id="selectReplyUserList2" resultMap="MyReplyUserResultMap2">
+		select * from myreply order by reply_no desc
+	</select>
+</mapper>
