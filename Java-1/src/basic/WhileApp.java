@@ -1,5 +1,7 @@
 package basic;
 
+import java.time.LocalDate;
+
 /* 
  while : 명령에 대한 반복 횟수가 불확실한 경우 사용
  ㄴ while(조건식) { 명령; 명령; ... }
